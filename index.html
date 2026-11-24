@@ -20,10 +20,31 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+html{scroll-behavior:smooth}
+@keyframes popIn{from{opacity:0;transform:translateY(26px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes rise{from{opacity:0;transform:translateY(48px)}to{opacity:1;transform:none}}
+@keyframes zoomIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.in1{animation:popIn .9s cubic-bezier(.2,.7,.2,1) both}
+.in2{animation:popIn .9s cubic-bezier(.2,.7,.2,1) .18s both}
+.in3{animation:fadeIn 1.2s ease .35s both}
+.fadein{animation:fadeIn .5s ease both}
+.slidein{animation:popIn .55s cubic-bezier(.2,.7,.2,1) both}
+.globe{animation:drift 9s ease-in-out infinite}
+@supports (animation-timeline: view()){
+.rv{animation:rise linear both;animation-timeline:view();animation-range:entry 0% cover 26%}
+.rz{animation:zoomIn linear both;animation-timeline:view();animation-range:entry 0% cover 30%}
+}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.prog{transform:scaleX(0)}
+@supports (animation-timeline: scroll()){.prog{animation:grow linear both;animation-timeline:scroll(root)}}
+@media (max-width:1320px){.rail{display:none}}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}.prog{animation:none !important}.in1,.in2,.in3,.fadein,.slidein,.rv,.rz,.globe{animation:none !important}}
 body{margin:0;background:#FFFFFF}
 a{color:#0A2C74}a:hover{color:#D23A09}
 .h{font-family:'Be Vietnam Pro',system-ui,sans-serif}
-.lift{transition:transform .25s ease,box-shadow .25s ease}.lift:hover{transform:translateY(-4px);box-shadow:0 22px 48px rgba(10,44,116,.14)}
+.lift{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}.lift:hover{transform:translateY(-4px);box-shadow:0 22px 48px rgba(10,44,116,.14);border-color:#E2430C !important}
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid #D23A09;outline-offset:2px}
 summary{cursor:pointer;list-style:none}summary::-webkit-details-marker{display:none}
 details[open] .pm{transform:rotate(45deg)}
@@ -47,10 +68,11 @@ details[open] .pm{transform:rotate(45deg)}
 <sc-if value="{{ isVi }}" hint-placeholder-val="{{ true }}">
 
 
-<div style="font-family: 'Inter', system-ui, sans-serif; color: #0E1B3D; background: #FFFFFF; position: relative">
+<div class="fadein" style="font-family: 'Inter', system-ui, sans-serif; color: #0E1B3D; background: #FFFFFF; position: relative">
 
 <!-- NAV -->
 <header style="position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid #DCEBF7">
+<div class="prog" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: linear-gradient(90deg, #E2430C, #1E9BFF); transform-origin: left"></div>
 <div class="hdr" style="max-width: 1240px; margin: 0 auto; padding: 10px 24px; display: flex; align-items: center; justify-content: space-between; gap: 10px 16px">
 <a href="#top" style="display: flex; align-items: center; gap: 10px; text-decoration: none">
 <img src="logo.png" alt="Logo B2S 2026" style="width: 38px; height: 40px; object-fit: contain">
@@ -70,62 +92,58 @@ details[open] .pm{transform:rotate(45deg)}
 
 <!-- 1. HERO -->
 <section id="top" style="position: relative; overflow: hidden; background: linear-gradient(180deg, #BFE8FF 0%, #D6F0FF 46%, #EAF8FF 100%)">
-<svg aria-hidden="true" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0" fill="none">
-<path d="M0 300 L70 300 L110 340 L110 520 L150 560" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
-<path class="trace" d="M0 300 L70 300 L110 340 L110 520 L150 560" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 9s"></path>
-<circle class="pulse" cx="150" cy="560" r="5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 0.00s"></circle>
-<circle cx="70" cy="300" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="110" cy="340" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="110" cy="520" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<path d="M0 380 L40 380 L40 640 L80 680 L80 760" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
-<path class="trace" d="M0 380 L40 380 L40 640 L80 680 L80 760" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 11s"></path>
-<circle class="pulse" cx="80" cy="760" r="5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 0.37s"></circle>
-<circle cx="40" cy="380" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="40" cy="640" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="80" cy="680" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<path d="M0 460 L60 460" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
-<path class="trace" d="M0 460 L60 460" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 13s"></path>
-<circle class="pulse" cx="60" cy="460" r="5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 0.74s"></circle>
-<path d="M1440 280 L1370 280 L1330 320 L1330 470 L1385 525" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
-<path class="trace" d="M1440 280 L1370 280 L1330 320 L1330 470 L1385 525" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 15s"></path>
-<circle class="pulse" cx="1385" cy="525" r="5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 1.11s"></circle>
-<circle cx="1370" cy="280" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="1330" cy="320" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="1330" cy="470" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<path d="M1440 360 L1400 360 L1400 620 L1360 660 L1360 740" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
-<path class="trace" d="M1440 360 L1400 360 L1400 620 L1360 660 L1360 740" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 17s"></path>
-<circle class="pulse" cx="1360" cy="740" r="5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 1.48s"></circle>
-<circle cx="1400" cy="360" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="1400" cy="620" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="1360" cy="660" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<path d="M1440 440 L1410 440" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
-<path class="trace" d="M1440 440 L1410 440" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 9s"></path>
-<circle class="pulse" cx="1410" cy="440" r="5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 1.85s"></circle>
-<path d="M300 0 L300 22 L330 52 L560 52" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
-<path class="trace" d="M300 0 L300 22 L330 52 L560 52" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 11s"></path>
-<circle class="pulse" cx="560" cy="52" r="5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 2.22s"></circle>
-<circle cx="300" cy="22" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="330" cy="52" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<path d="M1140 0 L1140 22 L1110 52 L880 52" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
-<path class="trace" d="M1140 0 L1140 22 L1110 52 L880 52" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 13s"></path>
-<circle class="pulse" cx="880" cy="52" r="5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 2.59s"></circle>
-<circle cx="1140" cy="22" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="1110" cy="52" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<path d="M0 820 L180 820 L220 780 L360 780" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
-<path class="trace" d="M0 820 L180 820 L220 780 L360 780" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 15s"></path>
-<circle class="pulse" cx="360" cy="780" r="5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 2.96s"></circle>
-<circle cx="180" cy="820" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="220" cy="780" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<path d="M1440 830 L1240 830 L1200 790 L1080 790" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
-<path class="trace" d="M1440 830 L1240 830 L1200 790 L1080 790" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 17s"></path>
-<circle class="pulse" cx="1080" cy="790" r="5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 3.33s"></circle>
-<circle cx="1240" cy="830" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="1200" cy="790" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
+<svg aria-hidden="true" class="rail" viewBox="0 0 110 900" preserveAspectRatio="xMidYMin meet" style="position: absolute; top: 0; left: 0; width: 110px; height: 100%; pointer-events: none; z-index: 0" fill="none">
+<path d="M0 40 L55 40 L77 62 L77 122" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M0 40 L55 40 L77 62 L77 122" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 8s"></path>
+<circle class="pulse" cx="77" cy="122" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 0.0s"></circle>
+<circle cx="77" cy="62" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
+<path d="M0 192 L70 192 L92 214 L92 274" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M0 192 L70 192 L92 214 L92 274" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 10s"></path>
+<circle class="pulse" cx="92" cy="274" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 0.4s"></circle>
+<circle cx="92" cy="214" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
+<path d="M0 314 L70 314 L92 336 L92 396" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M0 314 L70 314 L92 336 L92 396" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 12s"></path>
+<circle class="pulse" cx="92" cy="396" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 0.8s"></circle>
+<circle cx="92" cy="336" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
+<path d="M0 466 L70 466 L92 488 L92 548" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M0 466 L70 466 L92 488 L92 548" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 14s"></path>
+<circle class="pulse" cx="92" cy="548" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 1.2s"></circle>
+<circle cx="92" cy="488" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
+<path d="M0 588 L40 588 L62 610 L62 670" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M0 588 L40 588 L62 610 L62 670" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 8s"></path>
+<circle class="pulse" cx="62" cy="670" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 1.6s"></circle>
+<circle cx="62" cy="610" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
+<path d="M0 740 L55 740 L77 762 L77 822" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M0 740 L55 740 L77 762 L77 822" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 10s"></path>
+<circle class="pulse" cx="77" cy="822" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 2.0s"></circle>
+<circle cx="77" cy="762" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
+</svg>
+<svg aria-hidden="true" class="rail" viewBox="0 0 110 900" preserveAspectRatio="xMidYMin meet" style="position: absolute; top: 0; right: 0; width: 110px; height: 100%; pointer-events: none; z-index: 0" fill="none">
+<path d="M110 40 L55 40 L33 62 L33 182" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M110 40 L55 40 L33 62 L33 182" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 8s"></path>
+<circle class="pulse" cx="33" cy="182" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 0.0s"></circle>
+<circle cx="33" cy="62" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
+<path d="M110 252 L55 252 L33 274 L33 394" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M110 252 L55 252 L33 274 L33 394" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 10s"></path>
+<circle class="pulse" cx="33" cy="394" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 0.4s"></circle>
+<circle cx="33" cy="274" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
+<path d="M110 434 L70 434 L48 456 L48 576" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M110 434 L70 434 L48 456 L48 576" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 12s"></path>
+<circle class="pulse" cx="48" cy="576" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 0.8s"></circle>
+<circle cx="48" cy="456" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
+<path d="M110 646 L40 646 L18 668 L18 788" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M110 646 L40 646 L18 668 L18 788" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 14s"></path>
+<circle class="pulse" cx="18" cy="788" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 1.2s"></circle>
+<circle cx="18" cy="668" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
+<path d="M110 828 L70 828 L48 850 L48 940" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M110 828 L70 828 L48 850 L48 940" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 8s"></path>
+<circle class="pulse" cx="48" cy="940" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 1.6s"></circle>
+<circle cx="48" cy="850" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
 </svg>
 <img src="network.jpg" alt="" aria-hidden="true" class="globe" style="position: absolute; right: -60px; bottom: 0; width: 46%; max-width: 680px; height: auto; z-index: 0; opacity: 0.95; -webkit-mask-image: radial-gradient(ellipse 70% 80% at 70% 70%, #000 45%, transparent 75%); mask-image: radial-gradient(ellipse 70% 80% at 70% 70%, #000 45%, transparent 75%)">
 <div style="position: relative; z-index: 1; max-width: 1320px; margin: 0 auto; padding: 26px 24px 0; display: flex; flex-direction: column; gap: 26px">
 
-<div class="hb" style="display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 3fr) minmax(0, 0.9fr); gap: 24px; align-items: center">
+<div class="hb in1" style="display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 3fr) minmax(0, 0.9fr); gap: 24px; align-items: center">
 <img class="side" src="sponsors.png" alt="Đơn vị tài trợ" style="width: 100%; max-width: 300px; height: auto; justify-self: start; mix-blend-mode: multiply">
 <div class="ttl" style="display: flex; align-items: center; gap: 2.2%; min-width: 0">
 <img src="logo.png" alt="Logo B2S 2026" style="width: 15%; max-width: 128px; height: auto; flex: 0 0 auto; mix-blend-mode: multiply">
@@ -137,14 +155,12 @@ details[open] .pm{transform:rotate(45deg)}
 <img class="side" src="cosponsors.png" alt="Đơn vị đồng tài trợ" style="width: 100%; max-width: 330px; height: auto; justify-self: end; mix-blend-mode: multiply">
 </div>
 
-<div style="background: rgba(255,255,255,0.9); backdrop-filter: blur(6px); border-radius: 36px; box-shadow: 0 30px 80px rgba(10,44,116,0.14); padding: clamp(24px, 3.4vw, 48px); display: flex; flex-direction: column; align-items: center; gap: 26px; text-align: center; position: relative; overflow: hidden">
-<svg aria-hidden="true" viewBox="0 0 220 120" style="position: absolute; left: 0; top: 0; width: 220px; height: 120px; opacity: 0.5" fill="none"><path d="M0 30 H60 L80 50 H140" stroke="#9CC9F2" stroke-width="1.6"></path><path d="M0 70 H30 L50 90 H100" stroke="#9CC9F2" stroke-width="1.6"></path><circle cx="140" cy="50" r="4" stroke="#1E9BFF" stroke-width="1.6"></circle><circle cx="100" cy="90" r="4" stroke="#1E9BFF" stroke-width="1.6"></circle></svg>
-<svg aria-hidden="true" viewBox="0 0 220 120" style="position: absolute; right: 0; top: 0; width: 180px; height: 100px; opacity: 0.35; transform: scaleX(-1)" fill="none"><path d="M0 30 H60 L80 50 H140" stroke="#9CC9F2" stroke-width="1.6"></path><path d="M0 70 H30 L50 90 H100" stroke="#9CC9F2" stroke-width="1.6"></path><circle cx="140" cy="50" r="4" stroke="#E2430C" stroke-width="1.6"></circle><circle cx="100" cy="90" r="4" stroke="#E2430C" stroke-width="1.6"></circle></svg>
+<div class="in2" style="background: rgba(255,255,255,0.9); backdrop-filter: blur(6px); border-radius: 36px; box-shadow: 0 30px 80px rgba(10,44,116,0.14); padding: clamp(24px, 3.4vw, 48px); display: flex; flex-direction: column; align-items: center; gap: 26px; text-align: center; position: relative; overflow: hidden">
 <span class="h" style="position: relative; background: #0A2C74; color: #FFFFFF; font-size: 12px; font-weight: 800; padding: 8px 16px; border-radius: 999px; letter-spacing: 1.4px">B2S 2026 · SỞ CÔNG THƯƠNG TP.HCM · ITPC · HASI</span>
 <p style="position: relative; margin: 0; font-size: 19px; line-height: 1.65; color: #2A3A5E; max-width: 760px">Chương trình kết nối Buyer - doanh nghiệp dẫn dắt chuỗi, doanh nghiệp FDI - với nhà cung ứng Việt Nam, trên cơ sở nhu cầu thu mua thực tế và lịch gặp gỡ B2B 1:1 được xác nhận trước.</p>
 <div style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; width: 100%; max-width: 640px">
-<a href="#buyer" class="lift" style="text-decoration: none; background: #E2430C; color: #FFFFFF; border-radius: 18px; padding: 18px 22px; display: flex; justify-content: space-between; align-items: center; gap: 12px; box-shadow: 0 14px 30px rgba(226,67,12,0.3)"><span style="display: flex; flex-direction: column; gap: 3px; text-align: left"><span style="font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #FFD9C7">TÔI LÀ BUYER</span><strong class="h" style="font-size: 17px">Quy trình kết nối 5 bước</strong></span><span aria-hidden="true" style="font-size: 22px">→</span></a>
-<a href="https://hasi.org.vn/su-kien/hoi-nghi-ket-noi-cung-cau-lien-ket-doanh-nghiep-theo-cum-nganh-chuoi-cung-ung" class="lift" style="text-decoration: none; background: #FFFFFF; color: #0A2C74; border: 2px solid #0A2C74; border-radius: 18px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px"><span style="display: flex; flex-direction: column; gap: 3px; text-align: left"><span style="font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #4A5B80">TÔI LÀ NHÀ CUNG ỨNG</span><strong class="h" style="font-size: 17px">Đăng ký trên HASI HUB</strong></span><span aria-hidden="true" style="font-size: 22px">→</span></a>
+<a href="#buyer" class="lift rv" style="text-decoration: none; background: #E2430C; color: #FFFFFF; border-radius: 18px; padding: 18px 22px; display: flex; justify-content: space-between; align-items: center; gap: 12px; box-shadow: 0 14px 30px rgba(226,67,12,0.3)"><span style="display: flex; flex-direction: column; gap: 3px; text-align: left"><span style="font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #FFD9C7">TÔI LÀ BUYER</span><strong class="h" style="font-size: 17px">Quy trình kết nối 5 bước</strong></span><span aria-hidden="true" style="font-size: 22px">→</span></a>
+<a href="https://hasi.org.vn/su-kien/hoi-nghi-ket-noi-cung-cau-lien-ket-doanh-nghiep-theo-cum-nganh-chuoi-cung-ung" class="lift rv" style="text-decoration: none; background: #FFFFFF; color: #0A2C74; border: 2px solid #0A2C74; border-radius: 18px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px"><span style="display: flex; flex-direction: column; gap: 3px; text-align: left"><span style="font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #4A5B80">TÔI LÀ NHÀ CUNG ỨNG</span><strong class="h" style="font-size: 17px">Đăng ký trên HASI HUB</strong></span><span aria-hidden="true" style="font-size: 22px">→</span></a>
 </div>
 <div style="position: relative; width: 100%; border-top: 1px solid #DCEBF7; padding-top: 22px; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; text-align: left">
 <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 700; color: #4A5B80; letter-spacing: 1.2px">THỜI GIAN</span><strong class="h" style="font-size: 22px; color: #0A2C74">10 - 11/12/2026</strong><span style="font-size: 14px; color: #4A5B80">Thứ Năm - Thứ Sáu · 08:00 - 21:00 (GMT+7)</span></div>
@@ -157,47 +173,35 @@ details[open] .pm{transform:rotate(45deg)}
 </div>
 </div>
 </div>
-<img src="skyline.png" alt="" aria-hidden="true" style="position: relative; z-index: 1; display: block; width: 100%; height: 170px; object-fit: cover; object-position: center bottom; margin-top: -30px; -webkit-mask-image: linear-gradient(90deg, #000 70%, transparent 100%); mask-image: linear-gradient(90deg, #000 70%, transparent 100%)">
+<img class="in3" src="skyline.png" alt="" aria-hidden="true" style="position: relative; z-index: 1; display: block; width: 100%; height: 170px; object-fit: cover; object-position: center bottom; margin-top: -30px; -webkit-mask-image: linear-gradient(90deg, #000 70%, transparent 100%); mask-image: linear-gradient(90deg, #000 70%, transparent 100%)">
 </section>
 
 <!-- 2. STATS -->
 <section style="position: relative; overflow: hidden; background: #0A2C74; color: #FFFFFF">
 
-<svg aria-hidden="true" viewBox="0 0 1440 300" preserveAspectRatio="xMidYMid slice" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0" fill="none">
-<path d="M0 60 L120 60 L160 100 L160 220" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M0 60 L120 60 L160 100 L160 220" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 9s"></path>
-<circle class="pulse" cx="160" cy="220" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.00s"></circle>
-<circle cx="120" cy="60" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="160" cy="100" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M0 160 L60 160 L100 200 L100 300" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M0 160 L60 160 L100 200 L100 300" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 11s"></path>
-<circle class="pulse" cx="100" cy="300" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.37s"></circle>
-<circle cx="60" cy="160" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="100" cy="200" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M1440 70 L1300 70 L1260 110 L1260 230" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M1440 70 L1300 70 L1260 110 L1260 230" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 13s"></path>
-<circle class="pulse" cx="1260" cy="230" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.74s"></circle>
-<circle cx="1300" cy="70" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="1260" cy="110" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M1440 180 L1360 180 L1320 220 L1320 300" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M1440 180 L1360 180 L1320 220 L1320 300" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 15s"></path>
-<circle class="pulse" cx="1320" cy="300" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 1.11s"></circle>
-<circle cx="1360" cy="180" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="1320" cy="220" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M520 0 L520 30 L560 70 L760 70" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M520 0 L520 30 L560 70 L760 70" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 17s"></path>
-<circle class="pulse" cx="760" cy="70" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 1.48s"></circle>
-<circle cx="520" cy="30" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="560" cy="70" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M980 300 L980 270 L940 230 L820 230" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M980 300 L980 270 L940 230 L820 230" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 9s"></path>
-<circle class="pulse" cx="820" cy="230" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 1.85s"></circle>
-<circle cx="980" cy="270" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="940" cy="230" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
+<svg aria-hidden="true" class="rail" viewBox="0 0 110 300" preserveAspectRatio="xMidYMin meet" style="position: absolute; top: 0; left: 0; width: 110px; height: 100%; pointer-events: none; z-index: 0" fill="none">
+<path d="M0 40 L55 40 L77 62 L77 122" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M0 40 L55 40 L77 62 L77 122" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 8s"></path>
+<circle class="pulse" cx="77" cy="122" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.0s"></circle>
+<circle cx="77" cy="62" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
+<path d="M0 192 L70 192 L92 214 L92 274" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M0 192 L70 192 L92 214 L92 274" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 10s"></path>
+<circle class="pulse" cx="92" cy="274" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.4s"></circle>
+<circle cx="92" cy="214" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
+</svg>
+<svg aria-hidden="true" class="rail" viewBox="0 0 110 300" preserveAspectRatio="xMidYMin meet" style="position: absolute; top: 0; right: 0; width: 110px; height: 100%; pointer-events: none; z-index: 0" fill="none">
+<path d="M110 40 L55 40 L33 62 L33 182" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M110 40 L55 40 L33 62 L33 182" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 8s"></path>
+<circle class="pulse" cx="33" cy="182" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.0s"></circle>
+<circle cx="33" cy="62" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
+<path d="M110 252 L55 252 L33 274 L33 394" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M110 252 L55 252 L33 274 L33 394" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 10s"></path>
+<circle class="pulse" cx="33" cy="394" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.4s"></circle>
+<circle cx="33" cy="274" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
 </svg>
 <div style="position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; padding: 44px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 28px">
 <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
-<div style="display: flex; flex-direction: column; gap: 6px; border-left: 3px solid #D23A09; padding-left: 18px"><strong class="h" style="font-size: clamp(36px, 3.6vw, 48px); font-weight: 900; line-height: 1; font-variant-numeric: tabular-nums">{{ s.v }}</strong><span style="font-size: 14px; line-height: 1.45; color: #BBD0F2">{{ s.l }}</span></div>
+<div class="rv" style="display: flex; flex-direction: column; gap: 6px; border-left: 3px solid #D23A09; padding-left: 18px"><strong class="h" style="font-size: clamp(36px, 3.6vw, 48px); font-weight: 900; line-height: 1; font-variant-numeric: tabular-nums">{{ s.v }}</strong><span style="font-size: 14px; line-height: 1.45; color: #BBD0F2">{{ s.l }}</span></div>
 </sc-for>
 </div>
 </section>
@@ -208,41 +212,41 @@ details[open] .pm{transform:rotate(45deg)}
 <div style="display: flex; flex-wrap: wrap; gap: 28px; justify-content: space-between; align-items: flex-end">
 <div style="flex: 1 1 560px; display: flex; flex-direction: column; gap: 14px">
 <span class="h" style="color: #D23A09; font-weight: 800; font-size: 13px; letter-spacing: 2px">VÌ SAO NÊN THAM DỰ</span>
-<h2 class="h" style="margin: 0; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; font-weight: 900; color: #0A2C74; letter-spacing: -0.5px">Rút ngắn chu kỳ tìm kiếm và thẩm định nhà cung ứng</h2>
+<h2 class="h rv" style="margin: 0; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; font-weight: 900; color: #0A2C74; letter-spacing: -0.5px">Rút ngắn chu kỳ tìm kiếm và thẩm định nhà cung ứng</h2>
 </div>
 <p style="flex: 1 1 380px; margin: 0; font-size: 16px; line-height: 1.7; color: #4A5B80">B2S 2026 thuộc Kế hoạch phát triển liên kết doanh nghiệp theo cụm ngành, chuỗi giá trị của TP.HCM đến năm 2030, do Sở Công Thương, ITPC và HASI chủ trì điều phối.</p>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px">
-<div class="lift" style="background: #F3F9FF; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
+<div class="lift rv" style="background: #F3F9FF; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
 <span style="width: 52px; height: 52px; border-radius: 16px; background: #0A2C74; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"></path></svg></span>
 <h3 class="h" style="margin: 0; font-size: 19px; line-height: 1.35; color: #0A2C74">Cập nhật chiến lược nội địa hóa</h3>
 <p style="margin: 0; font-size: 15px; line-height: 1.65; color: #4A5B80">Doanh nghiệp dẫn dắt chuỗi chia sẻ định hướng nội địa hóa, nhu cầu thu mua và tiêu chuẩn lựa chọn nhà cung ứng.</p>
 </div>
-<div class="lift" style="background: #F3F9FF; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
+<div class="lift rv" style="background: #F3F9FF; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
 <span style="width: 52px; height: 52px; border-radius: 16px; background: #D23A09; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"></circle><circle cx="16" cy="16" r="3"></circle><path d="M10.5 10.5l3 3"></path></svg></span>
 <h3 class="h" style="margin: 0; font-size: 19px; line-height: 1.35; color: #0A2C74">Gặp gỡ B2B 1:1 theo lịch hẹn</h3>
 <p style="margin: 0; font-size: 15px; line-height: 1.65; color: #4A5B80">Buyer phê duyệt từng yêu cầu gặp gỡ; lịch làm việc được gửi qua email trước sự kiện 2 ngày.</p>
 </div>
-<div class="lift" style="background: #F3F9FF; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
+<div class="lift rv" style="background: #F3F9FF; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
 <span style="width: 52px; height: 52px; border-radius: 16px; background: #0A2C74; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l5-3v14M10 21V5l9 4v12"></path></svg></span>
 <h3 class="h" style="margin: 0; font-size: 19px; line-height: 1.35; color: #0A2C74">Khảo sát thực tế nhà máy FDI</h3>
 <p style="margin: 0; font-size: 15px; line-height: 1.65; color: #4A5B80">Factory DNA giới thiệu thực tiễn sản xuất, quản trị và chuẩn mực vận hành của doanh nghiệp FDI.</p>
 </div>
-<div class="lift" style="background: #F3F9FF; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
+<div class="lift rv" style="background: #F3F9FF; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
 <span style="width: 52px; height: 52px; border-radius: 16px; background: #D23A09; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"></path><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"></path></svg></span>
 <h3 class="h" style="margin: 0; font-size: 19px; line-height: 1.35; color: #0A2C74">Đồng hành từ chính quyền Thành phố</h3>
 <p style="margin: 0; font-size: 15px; line-height: 1.65; color: #4A5B80">Công bố Chương trình liên kết doanh nghiệp đến năm 2030 và lễ ký kết hợp tác với doanh nghiệp, hiệp hội.</p>
 </div>
 </div>
-<div style="display: flex; flex-direction: column; gap: 22px; background: #FFFFFF; border: 1px solid #DCEBF7; border-radius: 28px; padding: clamp(24px, 3vw, 36px); box-shadow: 0 20px 50px rgba(10,44,116,0.06)">
+<div class="rz" style="display: flex; flex-direction: column; gap: 22px; background: #FFFFFF; border: 1px solid #DCEBF7; border-radius: 28px; padding: clamp(24px, 3vw, 36px); box-shadow: 0 20px 50px rgba(10,44,116,0.06)">
 <div style="display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; align-items: flex-end">
 <div style="display: flex; flex-direction: column; gap: 8px"><span class="h" style="font-size: 13px; font-weight: 800; color: #D23A09; letter-spacing: 1.6px">12 LĨNH VỰC KẾT NỐI</span><strong class="h" style="font-size: clamp(22px, 2.2vw, 28px); line-height: 1.25; color: #0A2C74">Chuỗi cung ứng công nghiệp hỗ trợ trọng điểm</strong></div>
 <span style="font-size: 14px; line-height: 1.6; color: #4A5B80; max-width: 420px">Buyer chọn lĩnh vực quan tâm khi đăng tải nhu cầu thu mua để được kết nối đúng nhà cung ứng.</span>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(176px, 1fr)); gap: 12px">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px">
 <sc-for list="{{ tiles }}" as="g" hint-placeholder-count="12">
-<div class="lift" style="{{ g.style }}">
-<span style="{{ g.iconStyle }}"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ g.d }}"></path></svg></span>
+<div class="lift rv" style="{{ g.style }}">
+<span style="position: absolute; top: 14px; right: 16px; font-family: 'Be Vietnam Pro', sans-serif; font-size: 13px; font-weight: 800; color: #B9CDE4">{{ g.n }}</span><span style="{{ g.iconStyle }}"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><sc-for list="{{ g.paths }}" as="p" hint-placeholder-count="3"><path d="{{ p.d }}" stroke="{{ p.c }}"></path></sc-for></svg></span>
 <span class="h" style="font-size: 15px; line-height: 1.35; font-weight: 700; color: #0A2C74">{{ g.t }}</span>
 </div>
 </sc-for>
@@ -257,14 +261,14 @@ details[open] .pm{transform:rotate(45deg)}
 <div style="display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-end; justify-content: space-between">
 <div style="flex: 1.4 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
 <span class="h" style="color: #D23A09; font-weight: 800; font-size: 13px; letter-spacing: 2px">DÀNH CHO BUYER · QUY TRÌNH KẾT NỐI GIAO THƯƠNG</span>
-<h2 class="h" style="margin: 0; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; font-weight: 900; color: #0A2C74; letter-spacing: -0.5px">5 bước từ kích hoạt tài khoản đến phiên gặp gỡ B2B</h2>
+<h2 class="h rv" style="margin: 0; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; font-weight: 900; color: #0A2C74; letter-spacing: -0.5px">5 bước từ kích hoạt tài khoản đến phiên gặp gỡ B2B</h2>
 </div>
 <p style="flex: 1 1 380px; margin: 0; font-size: 16px; line-height: 1.7; color: #4A5B80">Tài khoản Buyer được <strong>Ban Tổ chức khởi tạo sẵn</strong>. Buyer chỉ cần hoàn thiện hồ sơ doanh nghiệp, đăng tải nhu cầu thu mua và phê duyệt yêu cầu gặp gỡ từ nhà cung ứng.</p>
 </div>
 
 <ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px">
 <sc-for list="{{ timeline }}" as="t" hint-placeholder-count="5">
-<li style="background: #FFFFFF; border: 1px solid #D5E8F7; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 12px; position: relative">
+<li class="rv" style="background: #FFFFFF; border: 1px solid #D5E8F7; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 12px; position: relative">
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span class="h" style="width: 42px; height: 42px; border-radius: 99px; background: #0A2C74; color: #FFFFFF; font-weight: 900; display: flex; align-items: center; justify-content: center">{{ t.n }}</span><span style="font-size: 11px; font-weight: 700; color: #B23007; background: #FFF1EA; padding: 4px 9px; border-radius: 999px">{{ t.who }}</span></div>
 <h3 class="h" style="margin: 0; font-size: 17px; line-height: 1.35; color: #0A2C74">{{ t.t }}</h3>
 <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #4A5B80">{{ t.d }}</p>
@@ -273,13 +277,13 @@ details[open] .pm{transform:rotate(45deg)}
 </sc-for>
 </ol>
 
-<div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between; background: #0A2C74; color: #FFFFFF; border-radius: 22px; padding: 22px 26px">
+<div class="rv" style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between; background: #0A2C74; color: #FFFFFF; border-radius: 22px; padding: 22px 26px">
 <span style="display: flex; gap: 14px; align-items: center; min-width: 0; flex: 1 1 520px"><span class="h" style="flex: 0 0 auto; background: #FFFFFF; color: #0A2C74; font-weight: 900; padding: 10px 14px; border-radius: 12px">Bàn B-05</span><span style="font-size: 15px; line-height: 1.55; color: #DCE7FB"><strong style="color: #FFFFFF">Tại sự kiện 11/12, 13:00-16:00:</strong> mỗi Buyer có bàn làm việc riêng, nhà cung ứng đã được phê duyệt luân phiên đến gặp theo lịch hẹn.</span></span>
 <button type="button" onClick="{{ toggleGuide }}" aria-expanded="{{ guideOpenStr }}" style="background: #D23A09; color: #FFFFFF; border: 0; border-radius: 999px; padding: 13px 22px; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; min-height: 46px">{{ guideBtn }}</button>
 </div>
 
 <sc-if value="{{ guideOpen }}" hint-placeholder-val="{{ false }}">
-<div style="background: #FFFFFF; border: 1px solid #D5E8F7; border-radius: 28px; padding: clamp(22px, 3.2vw, 40px); display: flex; flex-direction: column; gap: 24px">
+<div class="slidein" style="background: #FFFFFF; border: 1px solid #D5E8F7; border-radius: 28px; padding: clamp(22px, 3.2vw, 40px); display: flex; flex-direction: column; gap: 24px">
 <div role="tablist" aria-label="Màn hình hướng dẫn" style="display: flex; flex-wrap: wrap; gap: 8px">
 <sc-for list="{{ chips }}" as="u" hint-placeholder-count="9"><button type="button" role="tab" aria-selected="{{ u.sel }}" onClick="{{ u.pick }}" style="{{ u.style }}">{{ u.label }}</button></sc-for>
 </div>
@@ -360,43 +364,31 @@ details[open] .pm{transform:rotate(45deg)}
 <!-- 5. CHUONG TRINH -->
 <section id="chuong-trinh" style="position: relative; overflow: hidden; padding: 96px 24px; background: #0A2C74; color: #FFFFFF">
 
-<svg aria-hidden="true" viewBox="0 0 1440 300" preserveAspectRatio="xMidYMid slice" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0" fill="none">
-<path d="M0 60 L120 60 L160 100 L160 220" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M0 60 L120 60 L160 100 L160 220" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 9s"></path>
-<circle class="pulse" cx="160" cy="220" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.00s"></circle>
-<circle cx="120" cy="60" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="160" cy="100" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M0 160 L60 160 L100 200 L100 300" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M0 160 L60 160 L100 200 L100 300" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 11s"></path>
-<circle class="pulse" cx="100" cy="300" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.37s"></circle>
-<circle cx="60" cy="160" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="100" cy="200" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M1440 70 L1300 70 L1260 110 L1260 230" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M1440 70 L1300 70 L1260 110 L1260 230" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 13s"></path>
-<circle class="pulse" cx="1260" cy="230" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.74s"></circle>
-<circle cx="1300" cy="70" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="1260" cy="110" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M1440 180 L1360 180 L1320 220 L1320 300" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M1440 180 L1360 180 L1320 220 L1320 300" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 15s"></path>
-<circle class="pulse" cx="1320" cy="300" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 1.11s"></circle>
-<circle cx="1360" cy="180" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="1320" cy="220" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M520 0 L520 30 L560 70 L760 70" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M520 0 L520 30 L560 70 L760 70" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 17s"></path>
-<circle class="pulse" cx="760" cy="70" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 1.48s"></circle>
-<circle cx="520" cy="30" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="560" cy="70" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M980 300 L980 270 L940 230 L820 230" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M980 300 L980 270 L940 230 L820 230" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 9s"></path>
-<circle class="pulse" cx="820" cy="230" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 1.85s"></circle>
-<circle cx="980" cy="270" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="940" cy="230" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
+<svg aria-hidden="true" class="rail" viewBox="0 0 110 300" preserveAspectRatio="xMidYMin meet" style="position: absolute; top: 0; left: 0; width: 110px; height: 100%; pointer-events: none; z-index: 0" fill="none">
+<path d="M0 40 L55 40 L77 62 L77 122" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M0 40 L55 40 L77 62 L77 122" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 8s"></path>
+<circle class="pulse" cx="77" cy="122" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.0s"></circle>
+<circle cx="77" cy="62" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
+<path d="M0 192 L70 192 L92 214 L92 274" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M0 192 L70 192 L92 214 L92 274" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 10s"></path>
+<circle class="pulse" cx="92" cy="274" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.4s"></circle>
+<circle cx="92" cy="214" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
+</svg>
+<svg aria-hidden="true" class="rail" viewBox="0 0 110 300" preserveAspectRatio="xMidYMin meet" style="position: absolute; top: 0; right: 0; width: 110px; height: 100%; pointer-events: none; z-index: 0" fill="none">
+<path d="M110 40 L55 40 L33 62 L33 182" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M110 40 L55 40 L33 62 L33 182" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 8s"></path>
+<circle class="pulse" cx="33" cy="182" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.0s"></circle>
+<circle cx="33" cy="62" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
+<path d="M110 252 L55 252 L33 274 L33 394" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M110 252 L55 252 L33 274 L33 394" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 10s"></path>
+<circle class="pulse" cx="33" cy="394" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.4s"></circle>
+<circle cx="33" cy="274" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
 </svg>
 <div style="position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 36px">
 <div style="display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; align-items: flex-end">
 <div style="display: flex; flex-direction: column; gap: 14px">
 <span class="h" style="color: #FF8A5C; font-weight: 800; font-size: 13px; letter-spacing: 2px">CHƯƠNG TRÌNH</span>
-<h2 class="h" style="margin: 0; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; font-weight: 900; letter-spacing: -0.5px">03 hoạt động trọng tâm</h2>
+<h2 class="h rv" style="margin: 0; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; font-weight: 900; letter-spacing: -0.5px">03 hoạt động trọng tâm</h2>
 </div>
 <a href="https://hasi.org.vn/su-kien/hoi-nghi-ket-noi-cung-cau-lien-ket-doanh-nghiep-theo-cum-nganh-chuoi-cung-ung" style="display: flex; gap: 14px; align-items: center; text-decoration: none; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 18px; padding: 10px 16px 10px 10px">
 <img src="qr-chuong-trinh.png" alt="Mã QR thông tin chương trình" style="width: 72px; height: 72px; border-radius: 10px; background: #FFFFFF">
@@ -405,14 +397,14 @@ details[open] .pm{transform:rotate(45deg)}
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
 <div style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
-<div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16); border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 12px; flex: 1">
+<div class="rv" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16); border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 12px; flex: 1">
 <span class="h" style="font-size: 13px; font-weight: 800; color: #FF8A5C; letter-spacing: 1.2px">01 · THỨ NĂM, 10/12/2026</span>
 <h3 class="h" style="margin: 0; font-size: 24px">Factory DNA</h3>
 <strong style="font-size: 15px; color: #FFFFFF">09:00 - 12:00</strong>
 <p style="margin: 0; font-size: 15px; line-height: 1.65; color: #C8D8F5">Hành trình tiếp cận thực tiễn sản xuất và quản trị tại các doanh nghiệp FDI, tìm hiểu những yếu tố cốt lõi tạo nên năng lực cạnh tranh trong chuỗi cung ứng.</p>
 <span style="font-size: 13px; color: #9FB3D9">Địa điểm và thành phần tham quan sẽ được Ban Tổ chức xác nhận sau.</span>
 </div>
-<div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16); border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 12px; flex: 1">
+<div class="rv" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16); border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 12px; flex: 1">
 <span class="h" style="font-size: 13px; font-weight: 800; color: #FF8A5C; letter-spacing: 1.2px">03 · TỐI THỨ SÁU, 11/12/2026</span>
 <h3 class="h" style="margin: 0; font-size: 24px">Thank You Party</h3>
 <strong style="font-size: 15px; color: #FFFFFF">17:30 - 21:00</strong>
@@ -420,7 +412,7 @@ details[open] .pm{transform:rotate(45deg)}
 <span style="font-size: 13px; color: #9FB3D9">Sân Golf Sông Bé, số 77 Đại lộ Bình Dương, P. Lái Thiêu, TP.HCM</span>
 </div>
 </div>
-<div style="flex: 1.7 1 560px; min-width: 0; background: #FFFFFF; color: #0E1B3D; border-radius: 24px; padding: 28px 30px 12px; display: flex; flex-direction: column">
+<div class="rz" style="flex: 1.7 1 560px; min-width: 0; background: #FFFFFF; color: #0E1B3D; border-radius: 24px; padding: 28px 30px 12px; display: flex; flex-direction: column">
 <span class="h" style="font-size: 13px; font-weight: 800; color: #D23A09; letter-spacing: 1.2px">02 · THỨ SÁU, 11/12/2026</span>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px; margin: 8px 0 6px"><h3 class="h" style="margin: 0; font-size: 24px; color: #0A2C74">Matching Conference</h3><strong style="font-size: 15px; color: #0A2C74">08:00 - 16:00</strong></div>
 <span style="font-size: 14px; color: #4A5B80; margin-bottom: 8px">Hội trường VSIP I, số 8 Đại lộ Hữu Nghị, P. Bình Hòa, TP.HCM</span>
@@ -438,9 +430,9 @@ details[open] .pm{transform:rotate(45deg)}
 <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px">
 <div style="display: flex; flex-direction: column; gap: 14px; align-items: center; text-align: center">
 <span class="h" style="color: #D23A09; font-weight: 800; font-size: 13px; letter-spacing: 2px">TỔ CHỨC &amp; ĐỒNG HÀNH</span>
-<h2 class="h" style="margin: 0; font-size: clamp(28px, 3vw, 38px); line-height: 1.2; font-weight: 900; color: #0A2C74">Đơn vị tổ chức, tài trợ và đồng hành</h2>
+<h2 class="h rv" style="margin: 0; font-size: clamp(28px, 3vw, 38px); line-height: 1.2; font-weight: 900; color: #0A2C74">Đơn vị tổ chức, tài trợ và đồng hành</h2>
 </div>
-<div style="background: #FFFFFF; border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 8px; align-items: center; text-align: center">
+<div class="rz" style="background: #FFFFFF; border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 8px; align-items: center; text-align: center">
 <span style="font-size: 12px; font-weight: 700; color: #4A5B80; letter-spacing: 1.4px">CHỦ TRÌ ĐIỀU PHỐI</span>
 <div class="h" style="display: flex; flex-wrap: wrap; gap: 10px 36px; justify-content: center; font-size: 18px; font-weight: 800; color: #0A2C74"><span>Sở Công Thương TP.HCM</span><span>ITPC</span><span>HASI</span></div>
 <span style="font-size: 14px; color: #4A5B80; margin-top: 6px">Phối hợp: Sở Khoa học &amp; Công nghệ TP.HCM · Ban Quản lý các KCX &amp; CN TP.HCM · VSIP và các hội, hiệp hội</span>
@@ -457,7 +449,7 @@ details[open] .pm{transform:rotate(45deg)}
 <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start">
 <div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
 <span class="h" style="color: #D23A09; font-weight: 800; font-size: 13px; letter-spacing: 2px">ĐĂNG KÝ THAM DỰ</span>
-<h2 class="h" style="margin: 0; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; font-weight: 900; color: #0A2C74; letter-spacing: -0.5px">Đăng ký tham dự B2S 2026</h2>
+<h2 class="h rv" style="margin: 0; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; font-weight: 900; color: #0A2C74; letter-spacing: -0.5px">Đăng ký tham dự B2S 2026</h2>
 <p style="margin: 0; font-size: 16px; line-height: 1.7; color: #34446A">Vui lòng để lại thông tin, Ban Tổ chức sẽ liên hệ xác nhận. Đối với Buyer, Ban Tổ chức sẽ khởi tạo tài khoản HASI HUB để Quý doanh nghiệp hoàn thiện hồ sơ và đăng tải nhu cầu thu mua.</p>
 <div style="background: #FFFFFF; border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 15px">
 <span><strong>Hạn đăng ký:</strong> trước 07/12/2026</span>
@@ -466,7 +458,7 @@ details[open] .pm{transform:rotate(45deg)}
 <span><strong>Đơn vị trưng bày:</strong> đăng ký gian hàng tại HASI HUB › Sự kiện › Trang của tôi › Đăng ký gian hàng</span>
 </div>
 </div>
-<div style="flex: 1.5 1 520px; min-width: 0; background: #FFFFFF; border-radius: 28px; padding: clamp(24px, 3.5vw, 40px); box-shadow: 0 30px 70px rgba(10,44,116,0.16)">
+<div class="rz" style="flex: 1.5 1 520px; min-width: 0; background: #FFFFFF; border-radius: 28px; padding: clamp(24px, 3.5vw, 40px); box-shadow: 0 30px 70px rgba(10,44,116,0.16)">
 <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; flex-direction: column; gap: 18px">
 <fieldset style="border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px">
@@ -507,13 +499,13 @@ details[open] .pm{transform:rotate(45deg)}
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
 <div style="display: flex; flex-direction: column; gap: 14px">
 <span class="h" style="color: #D23A09; font-weight: 800; font-size: 13px; letter-spacing: 2px">ĐỊA ĐIỂM</span>
-<h2 class="h" style="margin: 0; font-size: clamp(28px, 3vw, 38px); line-height: 1.2; font-weight: 900; color: #0A2C74">Hẹn gặp tại TP.HCM</h2>
+<h2 class="h rv" style="margin: 0; font-size: clamp(28px, 3vw, 38px); line-height: 1.2; font-weight: 900; color: #0A2C74">Hẹn gặp tại TP.HCM</h2>
 </div>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px">
-<div style="background: #0A2C74; color: #FFFFFF; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><span class="h" style="font-size: 12px; font-weight: 800; color: #FF8A5C; letter-spacing: 1.2px">MATCHING CONFERENCE · 11/12</span><strong class="h" style="font-size: 19px">Hội trường VSIP I</strong><span style="font-size: 14px; line-height: 1.6; color: #C8D8F5">Số 8 Đại lộ Hữu Nghị, P. Bình Hòa, TP.HCM</span><a href="https://www.google.com/maps/search/?api=1&amp;query=H%E1%BB%99i+tr%C6%B0%E1%BB%9Dng+VSIP+I+8+%C4%90%E1%BA%A1i+l%E1%BB%99+H%E1%BB%AFu+Ngh%E1%BB%8B" style="align-self: flex-start; margin-top: 6px; text-decoration: none; background: #D23A09; color: #FFFFFF; font-weight: 700; font-size: 14px; padding: 11px 18px; border-radius: 999px">Chỉ đường →</a></div>
-<div style="background: #F3F9FF; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><span class="h" style="font-size: 12px; font-weight: 800; color: #D23A09; letter-spacing: 1.2px">FACTORY DNA · 10/12</span><strong class="h" style="font-size: 19px; color: #0A2C74">Nhà máy FDI</strong><span style="font-size: 14px; line-height: 1.6; color: #4A5B80">Địa điểm và thành phần tham quan sẽ được Ban Tổ chức xác nhận sau.</span></div>
-<div style="background: #F3F9FF; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><span class="h" style="font-size: 12px; font-weight: 800; color: #D23A09; letter-spacing: 1.2px">THANK YOU PARTY · TỐI 11/12</span><strong class="h" style="font-size: 19px; color: #0A2C74">Sân Golf Sông Bé</strong><span style="font-size: 14px; line-height: 1.6; color: #4A5B80">Số 77 Đại lộ Bình Dương, P. Lái Thiêu, TP.HCM</span><a href="https://www.google.com/maps/search/?api=1&amp;query=S%C3%A2n+Golf+S%C3%B4ng+B%C3%A9" style="align-self: flex-start; margin-top: 6px; text-decoration: none; color: #0A2C74; font-weight: 700; font-size: 14px; padding: 10px 16px; border-radius: 999px; border: 1.5px solid #0A2C74">Chỉ đường →</a></div>
+<div class="rv" style="background: #0A2C74; color: #FFFFFF; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><span class="h" style="font-size: 12px; font-weight: 800; color: #FF8A5C; letter-spacing: 1.2px">MATCHING CONFERENCE · 11/12</span><strong class="h" style="font-size: 19px">Hội trường VSIP I</strong><span style="font-size: 14px; line-height: 1.6; color: #C8D8F5">Số 8 Đại lộ Hữu Nghị, P. Bình Hòa, TP.HCM</span><a href="https://www.google.com/maps/search/?api=1&amp;query=H%E1%BB%99i+tr%C6%B0%E1%BB%9Dng+VSIP+I+8+%C4%90%E1%BA%A1i+l%E1%BB%99+H%E1%BB%AFu+Ngh%E1%BB%8B" style="align-self: flex-start; margin-top: 6px; text-decoration: none; background: #D23A09; color: #FFFFFF; font-weight: 700; font-size: 14px; padding: 11px 18px; border-radius: 999px">Chỉ đường →</a></div>
+<div class="rv" style="background: #F3F9FF; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><span class="h" style="font-size: 12px; font-weight: 800; color: #D23A09; letter-spacing: 1.2px">FACTORY DNA · 10/12</span><strong class="h" style="font-size: 19px; color: #0A2C74">Nhà máy FDI</strong><span style="font-size: 14px; line-height: 1.6; color: #4A5B80">Địa điểm và thành phần tham quan sẽ được Ban Tổ chức xác nhận sau.</span></div>
+<div class="rv" style="background: #F3F9FF; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><span class="h" style="font-size: 12px; font-weight: 800; color: #D23A09; letter-spacing: 1.2px">THANK YOU PARTY · TỐI 11/12</span><strong class="h" style="font-size: 19px; color: #0A2C74">Sân Golf Sông Bé</strong><span style="font-size: 14px; line-height: 1.6; color: #4A5B80">Số 77 Đại lộ Bình Dương, P. Lái Thiêu, TP.HCM</span><a href="https://www.google.com/maps/search/?api=1&amp;query=S%C3%A2n+Golf+S%C3%B4ng+B%C3%A9" style="align-self: flex-start; margin-top: 6px; text-decoration: none; color: #0A2C74; font-weight: 700; font-size: 14px; padding: 10px 16px; border-radius: 999px; border: 1.5px solid #0A2C74">Chỉ đường →</a></div>
 </div>
 </div>
 </section>
@@ -522,37 +514,25 @@ details[open] .pm{transform:rotate(45deg)}
 <footer style="position: relative; overflow: hidden; background: #071F55; color: #BBD0F2">
 <img src="skyline.png" alt="" aria-hidden="true" style="display: block; width: 100%; height: 110px; object-fit: cover; object-position: center bottom; background: #FFFFFF">
 
-<svg aria-hidden="true" viewBox="0 0 1440 300" preserveAspectRatio="xMidYMid slice" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0" fill="none">
-<path d="M0 60 L120 60 L160 100 L160 220" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M0 60 L120 60 L160 100 L160 220" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 9s"></path>
-<circle class="pulse" cx="160" cy="220" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.00s"></circle>
-<circle cx="120" cy="60" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="160" cy="100" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M0 160 L60 160 L100 200 L100 300" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M0 160 L60 160 L100 200 L100 300" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 11s"></path>
-<circle class="pulse" cx="100" cy="300" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.37s"></circle>
-<circle cx="60" cy="160" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="100" cy="200" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M1440 70 L1300 70 L1260 110 L1260 230" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M1440 70 L1300 70 L1260 110 L1260 230" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 13s"></path>
-<circle class="pulse" cx="1260" cy="230" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.74s"></circle>
-<circle cx="1300" cy="70" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="1260" cy="110" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M1440 180 L1360 180 L1320 220 L1320 300" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M1440 180 L1360 180 L1320 220 L1320 300" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 15s"></path>
-<circle class="pulse" cx="1320" cy="300" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 1.11s"></circle>
-<circle cx="1360" cy="180" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="1320" cy="220" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M520 0 L520 30 L560 70 L760 70" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M520 0 L520 30 L560 70 L760 70" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 17s"></path>
-<circle class="pulse" cx="760" cy="70" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 1.48s"></circle>
-<circle cx="520" cy="30" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="560" cy="70" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M980 300 L980 270 L940 230 L820 230" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M980 300 L980 270 L940 230 L820 230" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 9s"></path>
-<circle class="pulse" cx="820" cy="230" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 1.85s"></circle>
-<circle cx="980" cy="270" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="940" cy="230" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
+<svg aria-hidden="true" class="rail" viewBox="0 0 110 300" preserveAspectRatio="xMidYMin meet" style="position: absolute; top: 0; left: 0; width: 110px; height: 100%; pointer-events: none; z-index: 0" fill="none">
+<path d="M0 40 L55 40 L77 62 L77 122" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M0 40 L55 40 L77 62 L77 122" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 8s"></path>
+<circle class="pulse" cx="77" cy="122" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.0s"></circle>
+<circle cx="77" cy="62" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
+<path d="M0 192 L70 192 L92 214 L92 274" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M0 192 L70 192 L92 214 L92 274" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 10s"></path>
+<circle class="pulse" cx="92" cy="274" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.4s"></circle>
+<circle cx="92" cy="214" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
+</svg>
+<svg aria-hidden="true" class="rail" viewBox="0 0 110 300" preserveAspectRatio="xMidYMin meet" style="position: absolute; top: 0; right: 0; width: 110px; height: 100%; pointer-events: none; z-index: 0" fill="none">
+<path d="M110 40 L55 40 L33 62 L33 182" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M110 40 L55 40 L33 62 L33 182" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 8s"></path>
+<circle class="pulse" cx="33" cy="182" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.0s"></circle>
+<circle cx="33" cy="62" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
+<path d="M110 252 L55 252 L33 274 L33 394" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M110 252 L55 252 L33 274 L33 394" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 10s"></path>
+<circle class="pulse" cx="33" cy="394" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.4s"></circle>
+<circle cx="33" cy="274" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
 </svg>
 <div style="position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; padding: 48px 24px 28px; display: flex; flex-direction: column; gap: 32px">
 <div style="display: flex; flex-wrap: wrap; gap: 36px; justify-content: space-between">
@@ -588,10 +568,11 @@ details[open] .pm{transform:rotate(45deg)}
 <sc-if value="{{ isEn }}" hint-placeholder-val="{{ false }}">
 
 
-<div style="font-family: 'Inter', system-ui, sans-serif; color: #0E1B3D; background: #FFFFFF; position: relative">
+<div class="fadein" style="font-family: 'Inter', system-ui, sans-serif; color: #0E1B3D; background: #FFFFFF; position: relative">
 
 <!-- NAV -->
 <header style="position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); border-bottom: 1px solid #DCEBF7">
+<div class="prog" aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: linear-gradient(90deg, #E2430C, #1E9BFF); transform-origin: left"></div>
 <div class="hdr" style="max-width: 1240px; margin: 0 auto; padding: 10px 24px; display: flex; align-items: center; justify-content: space-between; gap: 10px 16px">
 <a href="#top" style="display: flex; align-items: center; gap: 10px; text-decoration: none">
 <img src="logo.png" alt="B2S 2026 logo" style="width: 38px; height: 40px; object-fit: contain">
@@ -611,62 +592,58 @@ details[open] .pm{transform:rotate(45deg)}
 
 <!-- 1. HERO -->
 <section id="top" style="position: relative; overflow: hidden; background: linear-gradient(180deg, #BFE8FF 0%, #D6F0FF 46%, #EAF8FF 100%)">
-<svg aria-hidden="true" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0" fill="none">
-<path d="M0 300 L70 300 L110 340 L110 520 L150 560" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
-<path class="trace" d="M0 300 L70 300 L110 340 L110 520 L150 560" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 9s"></path>
-<circle class="pulse" cx="150" cy="560" r="5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 0.00s"></circle>
-<circle cx="70" cy="300" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="110" cy="340" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="110" cy="520" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<path d="M0 380 L40 380 L40 640 L80 680 L80 760" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
-<path class="trace" d="M0 380 L40 380 L40 640 L80 680 L80 760" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 11s"></path>
-<circle class="pulse" cx="80" cy="760" r="5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 0.37s"></circle>
-<circle cx="40" cy="380" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="40" cy="640" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="80" cy="680" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<path d="M0 460 L60 460" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
-<path class="trace" d="M0 460 L60 460" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 13s"></path>
-<circle class="pulse" cx="60" cy="460" r="5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 0.74s"></circle>
-<path d="M1440 280 L1370 280 L1330 320 L1330 470 L1385 525" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
-<path class="trace" d="M1440 280 L1370 280 L1330 320 L1330 470 L1385 525" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 15s"></path>
-<circle class="pulse" cx="1385" cy="525" r="5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 1.11s"></circle>
-<circle cx="1370" cy="280" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="1330" cy="320" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="1330" cy="470" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<path d="M1440 360 L1400 360 L1400 620 L1360 660 L1360 740" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
-<path class="trace" d="M1440 360 L1400 360 L1400 620 L1360 660 L1360 740" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 17s"></path>
-<circle class="pulse" cx="1360" cy="740" r="5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 1.48s"></circle>
-<circle cx="1400" cy="360" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="1400" cy="620" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="1360" cy="660" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<path d="M1440 440 L1410 440" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
-<path class="trace" d="M1440 440 L1410 440" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 9s"></path>
-<circle class="pulse" cx="1410" cy="440" r="5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 1.85s"></circle>
-<path d="M300 0 L300 22 L330 52 L560 52" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
-<path class="trace" d="M300 0 L300 22 L330 52 L560 52" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 11s"></path>
-<circle class="pulse" cx="560" cy="52" r="5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 2.22s"></circle>
-<circle cx="300" cy="22" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="330" cy="52" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<path d="M1140 0 L1140 22 L1110 52 L880 52" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
-<path class="trace" d="M1140 0 L1140 22 L1110 52 L880 52" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 13s"></path>
-<circle class="pulse" cx="880" cy="52" r="5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 2.59s"></circle>
-<circle cx="1140" cy="22" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="1110" cy="52" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<path d="M0 820 L180 820 L220 780 L360 780" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
-<path class="trace" d="M0 820 L180 820 L220 780 L360 780" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 15s"></path>
-<circle class="pulse" cx="360" cy="780" r="5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 2.96s"></circle>
-<circle cx="180" cy="820" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="220" cy="780" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<path d="M1440 830 L1240 830 L1200 790 L1080 790" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
-<path class="trace" d="M1440 830 L1240 830 L1200 790 L1080 790" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 17s"></path>
-<circle class="pulse" cx="1080" cy="790" r="5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 3.33s"></circle>
-<circle cx="1240" cy="830" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
-<circle cx="1200" cy="790" r="2.6" fill="#2E7DD7" fill-opacity="0.35"></circle>
+<svg aria-hidden="true" class="rail" viewBox="0 0 110 900" preserveAspectRatio="xMidYMin meet" style="position: absolute; top: 0; left: 0; width: 110px; height: 100%; pointer-events: none; z-index: 0" fill="none">
+<path d="M0 40 L55 40 L77 62 L77 122" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M0 40 L55 40 L77 62 L77 122" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 8s"></path>
+<circle class="pulse" cx="77" cy="122" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 0.0s"></circle>
+<circle cx="77" cy="62" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
+<path d="M0 192 L70 192 L92 214 L92 274" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M0 192 L70 192 L92 214 L92 274" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 10s"></path>
+<circle class="pulse" cx="92" cy="274" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 0.4s"></circle>
+<circle cx="92" cy="214" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
+<path d="M0 314 L70 314 L92 336 L92 396" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M0 314 L70 314 L92 336 L92 396" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 12s"></path>
+<circle class="pulse" cx="92" cy="396" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 0.8s"></circle>
+<circle cx="92" cy="336" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
+<path d="M0 466 L70 466 L92 488 L92 548" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M0 466 L70 466 L92 488 L92 548" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 14s"></path>
+<circle class="pulse" cx="92" cy="548" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 1.2s"></circle>
+<circle cx="92" cy="488" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
+<path d="M0 588 L40 588 L62 610 L62 670" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M0 588 L40 588 L62 610 L62 670" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 8s"></path>
+<circle class="pulse" cx="62" cy="670" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 1.6s"></circle>
+<circle cx="62" cy="610" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
+<path d="M0 740 L55 740 L77 762 L77 822" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M0 740 L55 740 L77 762 L77 822" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 10s"></path>
+<circle class="pulse" cx="77" cy="822" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 2.0s"></circle>
+<circle cx="77" cy="762" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
+</svg>
+<svg aria-hidden="true" class="rail" viewBox="0 0 110 900" preserveAspectRatio="xMidYMin meet" style="position: absolute; top: 0; right: 0; width: 110px; height: 100%; pointer-events: none; z-index: 0" fill="none">
+<path d="M110 40 L55 40 L33 62 L33 182" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M110 40 L55 40 L33 62 L33 182" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 8s"></path>
+<circle class="pulse" cx="33" cy="182" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 0.0s"></circle>
+<circle cx="33" cy="62" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
+<path d="M110 252 L55 252 L33 274 L33 394" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M110 252 L55 252 L33 274 L33 394" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 10s"></path>
+<circle class="pulse" cx="33" cy="394" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 0.4s"></circle>
+<circle cx="33" cy="274" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
+<path d="M110 434 L70 434 L48 456 L48 576" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M110 434 L70 434 L48 456 L48 576" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 12s"></path>
+<circle class="pulse" cx="48" cy="576" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 0.8s"></circle>
+<circle cx="48" cy="456" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
+<path d="M110 646 L40 646 L18 668 L18 788" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M110 646 L40 646 L18 668 L18 788" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 14s"></path>
+<circle class="pulse" cx="18" cy="788" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 1.2s"></circle>
+<circle cx="18" cy="668" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
+<path d="M110 828 L70 828 L48 850 L48 940" stroke="#2E7DD7" stroke-opacity="0.35" stroke-width="2"></path>
+<path class="trace" d="M110 828 L70 828 L48 850 L48 940" stroke="#1E9BFF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 8s"></path>
+<circle class="pulse" cx="48" cy="940" r="4.5" stroke="#1E9BFF" stroke-width="2" style="animation-delay: 1.6s"></circle>
+<circle cx="48" cy="850" r="2.4" fill="#2E7DD7" fill-opacity="0.35"></circle>
 </svg>
 <img src="network.jpg" alt="" aria-hidden="true" class="globe" style="position: absolute; right: -60px; bottom: 0; width: 46%; max-width: 680px; height: auto; z-index: 0; opacity: 0.95; -webkit-mask-image: radial-gradient(ellipse 70% 80% at 70% 70%, #000 45%, transparent 75%); mask-image: radial-gradient(ellipse 70% 80% at 70% 70%, #000 45%, transparent 75%)">
 <div style="position: relative; z-index: 1; max-width: 1320px; margin: 0 auto; padding: 26px 24px 0; display: flex; flex-direction: column; gap: 26px">
 
-<div class="hb" style="display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 3fr) minmax(0, 0.9fr); gap: 24px; align-items: center">
+<div class="hb in1" style="display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 3fr) minmax(0, 0.9fr); gap: 24px; align-items: center">
 <img class="side" src="sponsors.png" alt="Sponsors" style="width: 100%; max-width: 300px; height: auto; justify-self: start; mix-blend-mode: multiply">
 <div class="ttl" style="display: flex; align-items: center; gap: 2.2%; min-width: 0">
 <img src="logo.png" alt="B2S 2026 logo" style="width: 15%; max-width: 128px; height: auto; flex: 0 0 auto; mix-blend-mode: multiply">
@@ -678,14 +655,12 @@ details[open] .pm{transform:rotate(45deg)}
 <img class="side" src="cosponsors.png" alt="Co-sponsors" style="width: 100%; max-width: 330px; height: auto; justify-self: end; mix-blend-mode: multiply">
 </div>
 
-<div style="background: rgba(255,255,255,0.9); backdrop-filter: blur(6px); border-radius: 36px; box-shadow: 0 30px 80px rgba(10,44,116,0.14); padding: clamp(24px, 3.4vw, 48px); display: flex; flex-direction: column; align-items: center; gap: 26px; text-align: center; position: relative; overflow: hidden">
-<svg aria-hidden="true" viewBox="0 0 220 120" style="position: absolute; left: 0; top: 0; width: 220px; height: 120px; opacity: 0.5" fill="none"><path d="M0 30 H60 L80 50 H140" stroke="#9CC9F2" stroke-width="1.6"></path><path d="M0 70 H30 L50 90 H100" stroke="#9CC9F2" stroke-width="1.6"></path><circle cx="140" cy="50" r="4" stroke="#1E9BFF" stroke-width="1.6"></circle><circle cx="100" cy="90" r="4" stroke="#1E9BFF" stroke-width="1.6"></circle></svg>
-<svg aria-hidden="true" viewBox="0 0 220 120" style="position: absolute; right: 0; top: 0; width: 180px; height: 100px; opacity: 0.35; transform: scaleX(-1)" fill="none"><path d="M0 30 H60 L80 50 H140" stroke="#9CC9F2" stroke-width="1.6"></path><path d="M0 70 H30 L50 90 H100" stroke="#9CC9F2" stroke-width="1.6"></path><circle cx="140" cy="50" r="4" stroke="#E2430C" stroke-width="1.6"></circle><circle cx="100" cy="90" r="4" stroke="#E2430C" stroke-width="1.6"></circle></svg>
+<div class="in2" style="background: rgba(255,255,255,0.9); backdrop-filter: blur(6px); border-radius: 36px; box-shadow: 0 30px 80px rgba(10,44,116,0.14); padding: clamp(24px, 3.4vw, 48px); display: flex; flex-direction: column; align-items: center; gap: 26px; text-align: center; position: relative; overflow: hidden">
 <span class="h" style="position: relative; background: #0A2C74; color: #FFFFFF; font-size: 12px; font-weight: 800; padding: 8px 16px; border-radius: 999px; letter-spacing: 1.4px">B2S 2026 · HCMC DEPARTMENT OF INDUSTRY AND TRADE · ITPC · HASI</span>
 <p style="position: relative; margin: 0; font-size: 19px; line-height: 1.65; color: #2A3A5E; max-width: 760px">A programme connecting Buyers - lead firms and FDI enterprises - with Vietnamese suppliers, based on real sourcing needs and pre-confirmed 1:1 B2B meetings.</p>
 <div style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; width: 100%; max-width: 640px">
-<a href="#buyer" class="lift" style="text-decoration: none; background: #E2430C; color: #FFFFFF; border-radius: 18px; padding: 18px 22px; display: flex; justify-content: space-between; align-items: center; gap: 12px; box-shadow: 0 14px 30px rgba(226,67,12,0.3)"><span style="display: flex; flex-direction: column; gap: 3px; text-align: left"><span style="font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #FFD9C7">I'M A BUYER</span><strong class="h" style="font-size: 17px">5-step matching process</strong></span><span aria-hidden="true" style="font-size: 22px">→</span></a>
-<a href="https://hasi.org.vn/su-kien/hoi-nghi-ket-noi-cung-cau-lien-ket-doanh-nghiep-theo-cum-nganh-chuoi-cung-ung" class="lift" style="text-decoration: none; background: #FFFFFF; color: #0A2C74; border: 2px solid #0A2C74; border-radius: 18px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px"><span style="display: flex; flex-direction: column; gap: 3px; text-align: left"><span style="font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #4A5B80">I'M A SUPPLIER</span><strong class="h" style="font-size: 17px">Register on HASI HUB</strong></span><span aria-hidden="true" style="font-size: 22px">→</span></a>
+<a href="#buyer" class="lift rv" style="text-decoration: none; background: #E2430C; color: #FFFFFF; border-radius: 18px; padding: 18px 22px; display: flex; justify-content: space-between; align-items: center; gap: 12px; box-shadow: 0 14px 30px rgba(226,67,12,0.3)"><span style="display: flex; flex-direction: column; gap: 3px; text-align: left"><span style="font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #FFD9C7">I'M A BUYER</span><strong class="h" style="font-size: 17px">5-step matching process</strong></span><span aria-hidden="true" style="font-size: 22px">→</span></a>
+<a href="https://hasi.org.vn/su-kien/hoi-nghi-ket-noi-cung-cau-lien-ket-doanh-nghiep-theo-cum-nganh-chuoi-cung-ung" class="lift rv" style="text-decoration: none; background: #FFFFFF; color: #0A2C74; border: 2px solid #0A2C74; border-radius: 18px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px"><span style="display: flex; flex-direction: column; gap: 3px; text-align: left"><span style="font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #4A5B80">I'M A SUPPLIER</span><strong class="h" style="font-size: 17px">Register on HASI HUB</strong></span><span aria-hidden="true" style="font-size: 22px">→</span></a>
 </div>
 <div style="position: relative; width: 100%; border-top: 1px solid #DCEBF7; padding-top: 22px; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; text-align: left">
 <div style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 700; color: #4A5B80; letter-spacing: 1.2px">DATE</span><strong class="h" style="font-size: 22px; color: #0A2C74">10 - 11 Dec 2026</strong><span style="font-size: 14px; color: #4A5B80">Thursday - Friday · 08:00 - 21:00 (GMT+7)</span></div>
@@ -698,47 +673,35 @@ details[open] .pm{transform:rotate(45deg)}
 </div>
 </div>
 </div>
-<img src="skyline.png" alt="" aria-hidden="true" style="position: relative; z-index: 1; display: block; width: 100%; height: 170px; object-fit: cover; object-position: center bottom; margin-top: -30px; -webkit-mask-image: linear-gradient(90deg, #000 70%, transparent 100%); mask-image: linear-gradient(90deg, #000 70%, transparent 100%)">
+<img class="in3" src="skyline.png" alt="" aria-hidden="true" style="position: relative; z-index: 1; display: block; width: 100%; height: 170px; object-fit: cover; object-position: center bottom; margin-top: -30px; -webkit-mask-image: linear-gradient(90deg, #000 70%, transparent 100%); mask-image: linear-gradient(90deg, #000 70%, transparent 100%)">
 </section>
 
 <!-- 2. STATS -->
 <section style="position: relative; overflow: hidden; background: #0A2C74; color: #FFFFFF">
 
-<svg aria-hidden="true" viewBox="0 0 1440 300" preserveAspectRatio="xMidYMid slice" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0" fill="none">
-<path d="M0 60 L120 60 L160 100 L160 220" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M0 60 L120 60 L160 100 L160 220" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 9s"></path>
-<circle class="pulse" cx="160" cy="220" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.00s"></circle>
-<circle cx="120" cy="60" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="160" cy="100" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M0 160 L60 160 L100 200 L100 300" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M0 160 L60 160 L100 200 L100 300" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 11s"></path>
-<circle class="pulse" cx="100" cy="300" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.37s"></circle>
-<circle cx="60" cy="160" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="100" cy="200" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M1440 70 L1300 70 L1260 110 L1260 230" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M1440 70 L1300 70 L1260 110 L1260 230" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 13s"></path>
-<circle class="pulse" cx="1260" cy="230" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.74s"></circle>
-<circle cx="1300" cy="70" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="1260" cy="110" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M1440 180 L1360 180 L1320 220 L1320 300" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M1440 180 L1360 180 L1320 220 L1320 300" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 15s"></path>
-<circle class="pulse" cx="1320" cy="300" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 1.11s"></circle>
-<circle cx="1360" cy="180" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="1320" cy="220" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M520 0 L520 30 L560 70 L760 70" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M520 0 L520 30 L560 70 L760 70" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 17s"></path>
-<circle class="pulse" cx="760" cy="70" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 1.48s"></circle>
-<circle cx="520" cy="30" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="560" cy="70" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M980 300 L980 270 L940 230 L820 230" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M980 300 L980 270 L940 230 L820 230" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 9s"></path>
-<circle class="pulse" cx="820" cy="230" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 1.85s"></circle>
-<circle cx="980" cy="270" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="940" cy="230" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
+<svg aria-hidden="true" class="rail" viewBox="0 0 110 300" preserveAspectRatio="xMidYMin meet" style="position: absolute; top: 0; left: 0; width: 110px; height: 100%; pointer-events: none; z-index: 0" fill="none">
+<path d="M0 40 L55 40 L77 62 L77 122" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M0 40 L55 40 L77 62 L77 122" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 8s"></path>
+<circle class="pulse" cx="77" cy="122" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.0s"></circle>
+<circle cx="77" cy="62" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
+<path d="M0 192 L70 192 L92 214 L92 274" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M0 192 L70 192 L92 214 L92 274" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 10s"></path>
+<circle class="pulse" cx="92" cy="274" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.4s"></circle>
+<circle cx="92" cy="214" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
+</svg>
+<svg aria-hidden="true" class="rail" viewBox="0 0 110 300" preserveAspectRatio="xMidYMin meet" style="position: absolute; top: 0; right: 0; width: 110px; height: 100%; pointer-events: none; z-index: 0" fill="none">
+<path d="M110 40 L55 40 L33 62 L33 182" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M110 40 L55 40 L33 62 L33 182" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 8s"></path>
+<circle class="pulse" cx="33" cy="182" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.0s"></circle>
+<circle cx="33" cy="62" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
+<path d="M110 252 L55 252 L33 274 L33 394" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M110 252 L55 252 L33 274 L33 394" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 10s"></path>
+<circle class="pulse" cx="33" cy="394" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.4s"></circle>
+<circle cx="33" cy="274" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
 </svg>
 <div style="position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; padding: 44px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 28px">
 <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
-<div style="display: flex; flex-direction: column; gap: 6px; border-left: 3px solid #D23A09; padding-left: 18px"><strong class="h" style="font-size: clamp(36px, 3.6vw, 48px); font-weight: 900; line-height: 1; font-variant-numeric: tabular-nums">{{ s.v }}</strong><span style="font-size: 14px; line-height: 1.45; color: #BBD0F2">{{ s.l }}</span></div>
+<div class="rv" style="display: flex; flex-direction: column; gap: 6px; border-left: 3px solid #D23A09; padding-left: 18px"><strong class="h" style="font-size: clamp(36px, 3.6vw, 48px); font-weight: 900; line-height: 1; font-variant-numeric: tabular-nums">{{ s.v }}</strong><span style="font-size: 14px; line-height: 1.45; color: #BBD0F2">{{ s.l }}</span></div>
 </sc-for>
 </div>
 </section>
@@ -749,41 +712,41 @@ details[open] .pm{transform:rotate(45deg)}
 <div style="display: flex; flex-wrap: wrap; gap: 28px; justify-content: space-between; align-items: flex-end">
 <div style="flex: 1 1 560px; display: flex; flex-direction: column; gap: 14px">
 <span class="h" style="color: #D23A09; font-weight: 800; font-size: 13px; letter-spacing: 2px">WHY ATTEND</span>
-<h2 class="h" style="margin: 0; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; font-weight: 900; color: #0A2C74; letter-spacing: -0.5px">Shorten your supplier search and qualification cycle</h2>
+<h2 class="h rv" style="margin: 0; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; font-weight: 900; color: #0A2C74; letter-spacing: -0.5px">Shorten your supplier search and qualification cycle</h2>
 </div>
 <p style="flex: 1 1 380px; margin: 0; font-size: 16px; line-height: 1.7; color: #4A5B80">B2S 2026 is part of Ho Chi Minh City's plan to develop business linkages across industry clusters and value chains to 2030, coordinated by the Department of Industry and Trade, ITPC and HASI.</p>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px">
-<div class="lift" style="background: #F3F9FF; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
+<div class="lift rv" style="background: #F3F9FF; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
 <span style="width: 52px; height: 52px; border-radius: 16px; background: #0A2C74; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"></path></svg></span>
 <h3 class="h" style="margin: 0; font-size: 19px; line-height: 1.35; color: #0A2C74">Localisation strategies, first-hand</h3>
 <p style="margin: 0; font-size: 15px; line-height: 1.65; color: #4A5B80">Lead firms share their localisation direction, sourcing needs and supplier selection criteria.</p>
 </div>
-<div class="lift" style="background: #F3F9FF; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
+<div class="lift rv" style="background: #F3F9FF; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
 <span style="width: 52px; height: 52px; border-radius: 16px; background: #D23A09; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"></circle><circle cx="16" cy="16" r="3"></circle><path d="M10.5 10.5l3 3"></path></svg></span>
 <h3 class="h" style="margin: 0; font-size: 19px; line-height: 1.35; color: #0A2C74">Scheduled 1:1 B2B meetings</h3>
 <p style="margin: 0; font-size: 15px; line-height: 1.65; color: #4A5B80">Buyers approve each meeting request; schedules are emailed 2 days before the event.</p>
 </div>
-<div class="lift" style="background: #F3F9FF; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
+<div class="lift rv" style="background: #F3F9FF; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
 <span style="width: 52px; height: 52px; border-radius: 16px; background: #0A2C74; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V10l5-3v14M10 21V5l9 4v12"></path></svg></span>
 <h3 class="h" style="margin: 0; font-size: 19px; line-height: 1.35; color: #0A2C74">On-site FDI factory visits</h3>
 <p style="margin: 0; font-size: 15px; line-height: 1.65; color: #4A5B80">Factory DNA showcases the production, management and operating standards of FDI manufacturers.</p>
 </div>
-<div class="lift" style="background: #F3F9FF; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
+<div class="lift rv" style="background: #F3F9FF; border-radius: 22px; padding: 30px; display: flex; flex-direction: column; gap: 14px">
 <span style="width: 52px; height: 52px; border-radius: 16px; background: #D23A09; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"></path><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"></path></svg></span>
 <h3 class="h" style="margin: 0; font-size: 19px; line-height: 1.35; color: #0A2C74">Backed by the City government</h3>
 <p style="margin: 0; font-size: 15px; line-height: 1.65; color: #4A5B80">Launch of the Business Linkage Programme to 2030 and cooperation signing with enterprises and associations.</p>
 </div>
 </div>
-<div style="display: flex; flex-direction: column; gap: 22px; background: #FFFFFF; border: 1px solid #DCEBF7; border-radius: 28px; padding: clamp(24px, 3vw, 36px); box-shadow: 0 20px 50px rgba(10,44,116,0.06)">
+<div class="rz" style="display: flex; flex-direction: column; gap: 22px; background: #FFFFFF; border: 1px solid #DCEBF7; border-radius: 28px; padding: clamp(24px, 3vw, 36px); box-shadow: 0 20px 50px rgba(10,44,116,0.06)">
 <div style="display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; align-items: flex-end">
 <div style="display: flex; flex-direction: column; gap: 8px"><span class="h" style="font-size: 13px; font-weight: 800; color: #D23A09; letter-spacing: 1.6px">12 MATCHING SECTORS</span><strong class="h" style="font-size: clamp(22px, 2.2vw, 28px); line-height: 1.25; color: #0A2C74">Key supporting-industry supply chains</strong></div>
 <span style="font-size: 14px; line-height: 1.6; color: #4A5B80; max-width: 420px">Buyers select their sectors when posting sourcing requests to be matched with the right suppliers.</span>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(176px, 1fr)); gap: 12px">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px">
 <sc-for list="{{ tiles }}" as="g" hint-placeholder-count="12">
-<div class="lift" style="{{ g.style }}">
-<span style="{{ g.iconStyle }}"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ g.d }}"></path></svg></span>
+<div class="lift rv" style="{{ g.style }}">
+<span style="position: absolute; top: 14px; right: 16px; font-family: 'Be Vietnam Pro', sans-serif; font-size: 13px; font-weight: 800; color: #B9CDE4">{{ g.n }}</span><span style="{{ g.iconStyle }}"><svg aria-hidden="true" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><sc-for list="{{ g.paths }}" as="p" hint-placeholder-count="3"><path d="{{ p.d }}" stroke="{{ p.c }}"></path></sc-for></svg></span>
 <span class="h" style="font-size: 15px; line-height: 1.35; font-weight: 700; color: #0A2C74">{{ g.t }}</span>
 </div>
 </sc-for>
@@ -798,14 +761,14 @@ details[open] .pm{transform:rotate(45deg)}
 <div style="display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-end; justify-content: space-between">
 <div style="flex: 1.4 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
 <span class="h" style="color: #D23A09; font-weight: 800; font-size: 13px; letter-spacing: 2px">FOR BUYERS · BUSINESS MATCHING PROCESS</span>
-<h2 class="h" style="margin: 0; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; font-weight: 900; color: #0A2C74; letter-spacing: -0.5px">5 steps from account activation to your B2B meetings</h2>
+<h2 class="h rv" style="margin: 0; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; font-weight: 900; color: #0A2C74; letter-spacing: -0.5px">5 steps from account activation to your B2B meetings</h2>
 </div>
 <p style="flex: 1 1 380px; margin: 0; font-size: 16px; line-height: 1.7; color: #4A5B80">Buyer accounts are <strong>pre-created by the Organising Committee</strong>. Buyers simply complete their company profile, post sourcing requests and approve meeting requests from suppliers.</p>
 </div>
 
 <ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px">
 <sc-for list="{{ timeline }}" as="t" hint-placeholder-count="5">
-<li style="background: #FFFFFF; border: 1px solid #D5E8F7; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 12px; position: relative">
+<li class="rv" style="background: #FFFFFF; border: 1px solid #D5E8F7; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 12px; position: relative">
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px"><span class="h" style="width: 42px; height: 42px; border-radius: 99px; background: #0A2C74; color: #FFFFFF; font-weight: 900; display: flex; align-items: center; justify-content: center">{{ t.n }}</span><span style="font-size: 11px; font-weight: 700; color: #B23007; background: #FFF1EA; padding: 4px 9px; border-radius: 999px">{{ t.who }}</span></div>
 <h3 class="h" style="margin: 0; font-size: 17px; line-height: 1.35; color: #0A2C74">{{ t.t }}</h3>
 <p style="margin: 0; font-size: 14px; line-height: 1.6; color: #4A5B80">{{ t.d }}</p>
@@ -814,13 +777,13 @@ details[open] .pm{transform:rotate(45deg)}
 </sc-for>
 </ol>
 
-<div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between; background: #0A2C74; color: #FFFFFF; border-radius: 22px; padding: 22px 26px">
+<div class="rv" style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between; background: #0A2C74; color: #FFFFFF; border-radius: 22px; padding: 22px 26px">
 <span style="display: flex; gap: 14px; align-items: center; min-width: 0; flex: 1 1 520px"><span class="h" style="flex: 0 0 auto; background: #FFFFFF; color: #0A2C74; font-weight: 900; padding: 10px 14px; border-radius: 12px">Table B-05</span><span style="font-size: 15px; line-height: 1.55; color: #DCE7FB"><strong style="color: #FFFFFF">At the event, 11 Dec, 13:00-16:00:</strong> each Buyer has a dedicated table; approved suppliers rotate to meet them on schedule.</span></span>
 <button type="button" onClick="{{ toggleGuide }}" aria-expanded="{{ guideOpenStr }}" style="background: #D23A09; color: #FFFFFF; border: 0; border-radius: 999px; padding: 13px 22px; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; min-height: 46px">{{ guideBtn }}</button>
 </div>
 
 <sc-if value="{{ guideOpen }}" hint-placeholder-val="{{ false }}">
-<div style="background: #FFFFFF; border: 1px solid #D5E8F7; border-radius: 28px; padding: clamp(22px, 3.2vw, 40px); display: flex; flex-direction: column; gap: 24px">
+<div class="slidein" style="background: #FFFFFF; border: 1px solid #D5E8F7; border-radius: 28px; padding: clamp(22px, 3.2vw, 40px); display: flex; flex-direction: column; gap: 24px">
 <div role="tablist" aria-label="Guide screens" style="display: flex; flex-wrap: wrap; gap: 8px">
 <sc-for list="{{ chips }}" as="u" hint-placeholder-count="9"><button type="button" role="tab" aria-selected="{{ u.sel }}" onClick="{{ u.pick }}" style="{{ u.style }}">{{ u.label }}</button></sc-for>
 </div>
@@ -901,43 +864,31 @@ details[open] .pm{transform:rotate(45deg)}
 <!-- 5. CHUONG TRINH -->
 <section id="chuong-trinh" style="position: relative; overflow: hidden; padding: 96px 24px; background: #0A2C74; color: #FFFFFF">
 
-<svg aria-hidden="true" viewBox="0 0 1440 300" preserveAspectRatio="xMidYMid slice" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0" fill="none">
-<path d="M0 60 L120 60 L160 100 L160 220" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M0 60 L120 60 L160 100 L160 220" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 9s"></path>
-<circle class="pulse" cx="160" cy="220" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.00s"></circle>
-<circle cx="120" cy="60" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="160" cy="100" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M0 160 L60 160 L100 200 L100 300" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M0 160 L60 160 L100 200 L100 300" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 11s"></path>
-<circle class="pulse" cx="100" cy="300" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.37s"></circle>
-<circle cx="60" cy="160" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="100" cy="200" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M1440 70 L1300 70 L1260 110 L1260 230" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M1440 70 L1300 70 L1260 110 L1260 230" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 13s"></path>
-<circle class="pulse" cx="1260" cy="230" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.74s"></circle>
-<circle cx="1300" cy="70" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="1260" cy="110" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M1440 180 L1360 180 L1320 220 L1320 300" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M1440 180 L1360 180 L1320 220 L1320 300" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 15s"></path>
-<circle class="pulse" cx="1320" cy="300" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 1.11s"></circle>
-<circle cx="1360" cy="180" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="1320" cy="220" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M520 0 L520 30 L560 70 L760 70" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M520 0 L520 30 L560 70 L760 70" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 17s"></path>
-<circle class="pulse" cx="760" cy="70" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 1.48s"></circle>
-<circle cx="520" cy="30" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="560" cy="70" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M980 300 L980 270 L940 230 L820 230" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M980 300 L980 270 L940 230 L820 230" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 9s"></path>
-<circle class="pulse" cx="820" cy="230" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 1.85s"></circle>
-<circle cx="980" cy="270" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="940" cy="230" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
+<svg aria-hidden="true" class="rail" viewBox="0 0 110 300" preserveAspectRatio="xMidYMin meet" style="position: absolute; top: 0; left: 0; width: 110px; height: 100%; pointer-events: none; z-index: 0" fill="none">
+<path d="M0 40 L55 40 L77 62 L77 122" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M0 40 L55 40 L77 62 L77 122" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 8s"></path>
+<circle class="pulse" cx="77" cy="122" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.0s"></circle>
+<circle cx="77" cy="62" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
+<path d="M0 192 L70 192 L92 214 L92 274" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M0 192 L70 192 L92 214 L92 274" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 10s"></path>
+<circle class="pulse" cx="92" cy="274" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.4s"></circle>
+<circle cx="92" cy="214" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
+</svg>
+<svg aria-hidden="true" class="rail" viewBox="0 0 110 300" preserveAspectRatio="xMidYMin meet" style="position: absolute; top: 0; right: 0; width: 110px; height: 100%; pointer-events: none; z-index: 0" fill="none">
+<path d="M110 40 L55 40 L33 62 L33 182" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M110 40 L55 40 L33 62 L33 182" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 8s"></path>
+<circle class="pulse" cx="33" cy="182" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.0s"></circle>
+<circle cx="33" cy="62" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
+<path d="M110 252 L55 252 L33 274 L33 394" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M110 252 L55 252 L33 274 L33 394" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 10s"></path>
+<circle class="pulse" cx="33" cy="394" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.4s"></circle>
+<circle cx="33" cy="274" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
 </svg>
 <div style="position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 36px">
 <div style="display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; align-items: flex-end">
 <div style="display: flex; flex-direction: column; gap: 14px">
 <span class="h" style="color: #FF8A5C; font-weight: 800; font-size: 13px; letter-spacing: 2px">PROGRAMME</span>
-<h2 class="h" style="margin: 0; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; font-weight: 900; letter-spacing: -0.5px">3 core activities</h2>
+<h2 class="h rv" style="margin: 0; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; font-weight: 900; letter-spacing: -0.5px">3 core activities</h2>
 </div>
 <a href="https://hasi.org.vn/su-kien/hoi-nghi-ket-noi-cung-cau-lien-ket-doanh-nghiep-theo-cum-nganh-chuoi-cung-ung" style="display: flex; gap: 14px; align-items: center; text-decoration: none; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 18px; padding: 10px 16px 10px 10px">
 <img src="qr-chuong-trinh.png" alt="Programme QR code" style="width: 72px; height: 72px; border-radius: 10px; background: #FFFFFF">
@@ -946,14 +897,14 @@ details[open] .pm{transform:rotate(45deg)}
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
 <div style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
-<div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16); border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 12px; flex: 1">
+<div class="rv" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16); border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 12px; flex: 1">
 <span class="h" style="font-size: 13px; font-weight: 800; color: #FF8A5C; letter-spacing: 1.2px">01 · THURSDAY, 10 DEC 2026</span>
 <h3 class="h" style="margin: 0; font-size: 24px">Factory DNA</h3>
 <strong style="font-size: 15px; color: #FFFFFF">09:00 - 12:00</strong>
 <p style="margin: 0; font-size: 15px; line-height: 1.65; color: #C8D8F5">A journey into the production and management practices of FDI manufacturers, exploring what drives their competitiveness in the supply chain.</p>
 <span style="font-size: 13px; color: #9FB3D9">Venues and delegations will be confirmed by the Organising Committee.</span>
 </div>
-<div style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16); border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 12px; flex: 1">
+<div class="rv" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16); border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 12px; flex: 1">
 <span class="h" style="font-size: 13px; font-weight: 800; color: #FF8A5C; letter-spacing: 1.2px">03 · FRIDAY EVENING, 11 DEC 2026</span>
 <h3 class="h" style="margin: 0; font-size: 24px">Thank You Party</h3>
 <strong style="font-size: 15px; color: #FFFFFF">17:30 - 21:00</strong>
@@ -961,7 +912,7 @@ details[open] .pm{transform:rotate(45deg)}
 <span style="font-size: 13px; color: #9FB3D9">Song Be Golf Resort, 77 Binh Duong Boulevard, Lai Thieu Ward, HCMC</span>
 </div>
 </div>
-<div style="flex: 1.7 1 560px; min-width: 0; background: #FFFFFF; color: #0E1B3D; border-radius: 24px; padding: 28px 30px 12px; display: flex; flex-direction: column">
+<div class="rz" style="flex: 1.7 1 560px; min-width: 0; background: #FFFFFF; color: #0E1B3D; border-radius: 24px; padding: 28px 30px 12px; display: flex; flex-direction: column">
 <span class="h" style="font-size: 13px; font-weight: 800; color: #D23A09; letter-spacing: 1.2px">02 · FRIDAY, 11 DEC 2026</span>
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px; margin: 8px 0 6px"><h3 class="h" style="margin: 0; font-size: 24px; color: #0A2C74">Matching Conference</h3><strong style="font-size: 15px; color: #0A2C74">08:00 - 16:00</strong></div>
 <span style="font-size: 14px; color: #4A5B80; margin-bottom: 8px">VSIP I Hall, 8 Huu Nghi Boulevard, Binh Hoa Ward, HCMC</span>
@@ -979,9 +930,9 @@ details[open] .pm{transform:rotate(45deg)}
 <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-direction: column; gap: 28px">
 <div style="display: flex; flex-direction: column; gap: 14px; align-items: center; text-align: center">
 <span class="h" style="color: #D23A09; font-weight: 800; font-size: 13px; letter-spacing: 2px">ORGANISERS &amp; PARTNERS</span>
-<h2 class="h" style="margin: 0; font-size: clamp(28px, 3vw, 38px); line-height: 1.2; font-weight: 900; color: #0A2C74">Organisers, sponsors and partners</h2>
+<h2 class="h rv" style="margin: 0; font-size: clamp(28px, 3vw, 38px); line-height: 1.2; font-weight: 900; color: #0A2C74">Organisers, sponsors and partners</h2>
 </div>
-<div style="background: #FFFFFF; border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 8px; align-items: center; text-align: center">
+<div class="rz" style="background: #FFFFFF; border-radius: 24px; padding: 28px; display: flex; flex-direction: column; gap: 8px; align-items: center; text-align: center">
 <span style="font-size: 12px; font-weight: 700; color: #4A5B80; letter-spacing: 1.4px">COORDINATED BY</span>
 <div class="h" style="display: flex; flex-wrap: wrap; gap: 10px 36px; justify-content: center; font-size: 18px; font-weight: 800; color: #0A2C74"><span>HCMC Department of Industry and Trade</span><span>ITPC</span><span>HASI</span></div>
 <span style="font-size: 14px; color: #4A5B80; margin-top: 6px">In cooperation with: HCMC Department of Science and Technology · HEPZA · VSIP and business associations</span>
@@ -998,7 +949,7 @@ details[open] .pm{transform:rotate(45deg)}
 <div style="max-width: 1240px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start">
 <div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
 <span class="h" style="color: #D23A09; font-weight: 800; font-size: 13px; letter-spacing: 2px">REGISTRATION</span>
-<h2 class="h" style="margin: 0; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; font-weight: 900; color: #0A2C74; letter-spacing: -0.5px">Register for B2S 2026</h2>
+<h2 class="h rv" style="margin: 0; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.15; font-weight: 900; color: #0A2C74; letter-spacing: -0.5px">Register for B2S 2026</h2>
 <p style="margin: 0; font-size: 16px; line-height: 1.7; color: #34446A">Leave your details and the Organising Committee will confirm with you. For Buyers, the Committee will create a HASI HUB account so you can complete your profile and post sourcing requests.</p>
 <div style="background: #FFFFFF; border-radius: 18px; padding: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 15px">
 <span><strong>Deadline:</strong> before 7 December 2026</span>
@@ -1007,7 +958,7 @@ details[open] .pm{transform:rotate(45deg)}
 <span><strong>Exhibitors:</strong> book a booth on HASI HUB › Events › My page › Booth registration</span>
 </div>
 </div>
-<div style="flex: 1.5 1 520px; min-width: 0; background: #FFFFFF; border-radius: 28px; padding: clamp(24px, 3.5vw, 40px); box-shadow: 0 30px 70px rgba(10,44,116,0.16)">
+<div class="rz" style="flex: 1.5 1 520px; min-width: 0; background: #FFFFFF; border-radius: 28px; padding: clamp(24px, 3.5vw, 40px); box-shadow: 0 30px 70px rgba(10,44,116,0.16)">
 <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ true }}">
 <div style="display: flex; flex-direction: column; gap: 18px">
 <fieldset style="border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px">
@@ -1048,13 +999,13 @@ details[open] .pm{transform:rotate(45deg)}
 <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px">
 <div style="display: flex; flex-direction: column; gap: 14px">
 <span class="h" style="color: #D23A09; font-weight: 800; font-size: 13px; letter-spacing: 2px">VENUE</span>
-<h2 class="h" style="margin: 0; font-size: clamp(28px, 3vw, 38px); line-height: 1.2; font-weight: 900; color: #0A2C74">See you in Ho Chi Minh City</h2>
+<h2 class="h rv" style="margin: 0; font-size: clamp(28px, 3vw, 38px); line-height: 1.2; font-weight: 900; color: #0A2C74">See you in Ho Chi Minh City</h2>
 </div>
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px">
-<div style="background: #0A2C74; color: #FFFFFF; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><span class="h" style="font-size: 12px; font-weight: 800; color: #FF8A5C; letter-spacing: 1.2px">MATCHING CONFERENCE · 11 DEC</span><strong class="h" style="font-size: 19px">VSIP I Hall</strong><span style="font-size: 14px; line-height: 1.6; color: #C8D8F5">8 Huu Nghi Boulevard, Binh Hoa Ward, HCMC</span><a href="https://www.google.com/maps/search/?api=1&amp;query=H%E1%BB%99i+tr%C6%B0%E1%BB%9Dng+VSIP+I+8+%C4%90%E1%BA%A1i+l%E1%BB%99+H%E1%BB%AFu+Ngh%E1%BB%8B" style="align-self: flex-start; margin-top: 6px; text-decoration: none; background: #D23A09; color: #FFFFFF; font-weight: 700; font-size: 14px; padding: 11px 18px; border-radius: 999px">Directions →</a></div>
-<div style="background: #F3F9FF; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><span class="h" style="font-size: 12px; font-weight: 800; color: #D23A09; letter-spacing: 1.2px">FACTORY DNA · 10 DEC</span><strong class="h" style="font-size: 19px; color: #0A2C74">FDI factories</strong><span style="font-size: 14px; line-height: 1.6; color: #4A5B80">Venues and delegations will be confirmed by the Organising Committee.</span></div>
-<div style="background: #F3F9FF; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><span class="h" style="font-size: 12px; font-weight: 800; color: #D23A09; letter-spacing: 1.2px">THANK YOU PARTY · EVENING 11 DEC</span><strong class="h" style="font-size: 19px; color: #0A2C74">Song Be Golf Resort</strong><span style="font-size: 14px; line-height: 1.6; color: #4A5B80">77 Binh Duong Boulevard, Lai Thieu Ward, HCMC</span><a href="https://www.google.com/maps/search/?api=1&amp;query=S%C3%A2n+Golf+S%C3%B4ng+B%C3%A9" style="align-self: flex-start; margin-top: 6px; text-decoration: none; color: #0A2C74; font-weight: 700; font-size: 14px; padding: 10px 16px; border-radius: 999px; border: 1.5px solid #0A2C74">Directions →</a></div>
+<div class="rv" style="background: #0A2C74; color: #FFFFFF; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><span class="h" style="font-size: 12px; font-weight: 800; color: #FF8A5C; letter-spacing: 1.2px">MATCHING CONFERENCE · 11 DEC</span><strong class="h" style="font-size: 19px">VSIP I Hall</strong><span style="font-size: 14px; line-height: 1.6; color: #C8D8F5">8 Huu Nghi Boulevard, Binh Hoa Ward, HCMC</span><a href="https://www.google.com/maps/search/?api=1&amp;query=H%E1%BB%99i+tr%C6%B0%E1%BB%9Dng+VSIP+I+8+%C4%90%E1%BA%A1i+l%E1%BB%99+H%E1%BB%AFu+Ngh%E1%BB%8B" style="align-self: flex-start; margin-top: 6px; text-decoration: none; background: #D23A09; color: #FFFFFF; font-weight: 700; font-size: 14px; padding: 11px 18px; border-radius: 999px">Directions →</a></div>
+<div class="rv" style="background: #F3F9FF; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><span class="h" style="font-size: 12px; font-weight: 800; color: #D23A09; letter-spacing: 1.2px">FACTORY DNA · 10 DEC</span><strong class="h" style="font-size: 19px; color: #0A2C74">FDI factories</strong><span style="font-size: 14px; line-height: 1.6; color: #4A5B80">Venues and delegations will be confirmed by the Organising Committee.</span></div>
+<div class="rv" style="background: #F3F9FF; border-radius: 22px; padding: 26px; display: flex; flex-direction: column; gap: 10px"><span class="h" style="font-size: 12px; font-weight: 800; color: #D23A09; letter-spacing: 1.2px">THANK YOU PARTY · EVENING 11 DEC</span><strong class="h" style="font-size: 19px; color: #0A2C74">Song Be Golf Resort</strong><span style="font-size: 14px; line-height: 1.6; color: #4A5B80">77 Binh Duong Boulevard, Lai Thieu Ward, HCMC</span><a href="https://www.google.com/maps/search/?api=1&amp;query=S%C3%A2n+Golf+S%C3%B4ng+B%C3%A9" style="align-self: flex-start; margin-top: 6px; text-decoration: none; color: #0A2C74; font-weight: 700; font-size: 14px; padding: 10px 16px; border-radius: 999px; border: 1.5px solid #0A2C74">Directions →</a></div>
 </div>
 </div>
 </section>
@@ -1063,37 +1014,25 @@ details[open] .pm{transform:rotate(45deg)}
 <footer style="position: relative; overflow: hidden; background: #071F55; color: #BBD0F2">
 <img src="skyline.png" alt="" aria-hidden="true" style="display: block; width: 100%; height: 110px; object-fit: cover; object-position: center bottom; background: #FFFFFF">
 
-<svg aria-hidden="true" viewBox="0 0 1440 300" preserveAspectRatio="xMidYMid slice" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0" fill="none">
-<path d="M0 60 L120 60 L160 100 L160 220" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M0 60 L120 60 L160 100 L160 220" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 9s"></path>
-<circle class="pulse" cx="160" cy="220" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.00s"></circle>
-<circle cx="120" cy="60" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="160" cy="100" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M0 160 L60 160 L100 200 L100 300" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M0 160 L60 160 L100 200 L100 300" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 11s"></path>
-<circle class="pulse" cx="100" cy="300" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.37s"></circle>
-<circle cx="60" cy="160" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="100" cy="200" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M1440 70 L1300 70 L1260 110 L1260 230" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M1440 70 L1300 70 L1260 110 L1260 230" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 13s"></path>
-<circle class="pulse" cx="1260" cy="230" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.74s"></circle>
-<circle cx="1300" cy="70" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="1260" cy="110" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M1440 180 L1360 180 L1320 220 L1320 300" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M1440 180 L1360 180 L1320 220 L1320 300" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 15s"></path>
-<circle class="pulse" cx="1320" cy="300" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 1.11s"></circle>
-<circle cx="1360" cy="180" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="1320" cy="220" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M520 0 L520 30 L560 70 L760 70" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M520 0 L520 30 L560 70 L760 70" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 17s"></path>
-<circle class="pulse" cx="760" cy="70" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 1.48s"></circle>
-<circle cx="520" cy="30" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="560" cy="70" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<path d="M980 300 L980 270 L940 230 L820 230" stroke="#7FB8FF" stroke-opacity="0.22" stroke-width="2"></path>
-<path class="trace" d="M980 300 L980 270 L940 230 L820 230" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 9s"></path>
-<circle class="pulse" cx="820" cy="230" r="5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 1.85s"></circle>
-<circle cx="980" cy="270" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
-<circle cx="940" cy="230" r="2.6" fill="#7FB8FF" fill-opacity="0.22"></circle>
+<svg aria-hidden="true" class="rail" viewBox="0 0 110 300" preserveAspectRatio="xMidYMin meet" style="position: absolute; top: 0; left: 0; width: 110px; height: 100%; pointer-events: none; z-index: 0" fill="none">
+<path d="M0 40 L55 40 L77 62 L77 122" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M0 40 L55 40 L77 62 L77 122" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 8s"></path>
+<circle class="pulse" cx="77" cy="122" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.0s"></circle>
+<circle cx="77" cy="62" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
+<path d="M0 192 L70 192 L92 214 L92 274" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M0 192 L70 192 L92 214 L92 274" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 10s"></path>
+<circle class="pulse" cx="92" cy="274" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.4s"></circle>
+<circle cx="92" cy="214" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
+</svg>
+<svg aria-hidden="true" class="rail" viewBox="0 0 110 300" preserveAspectRatio="xMidYMin meet" style="position: absolute; top: 0; right: 0; width: 110px; height: 100%; pointer-events: none; z-index: 0" fill="none">
+<path d="M110 40 L55 40 L33 62 L33 182" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M110 40 L55 40 L33 62 L33 182" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 8s"></path>
+<circle class="pulse" cx="33" cy="182" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.0s"></circle>
+<circle cx="33" cy="62" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
+<path d="M110 252 L55 252 L33 274 L33 394" stroke="#7FB8FF" stroke-opacity="0.25" stroke-width="2"></path>
+<path class="trace" d="M110 252 L55 252 L33 274 L33 394" stroke="#9FD3FF" stroke-width="2.4" stroke-linecap="round" style="animation-duration: 10s"></path>
+<circle class="pulse" cx="33" cy="394" r="4.5" stroke="#9FD3FF" stroke-width="2" style="animation-delay: 0.4s"></circle>
+<circle cx="33" cy="274" r="2.4" fill="#7FB8FF" fill-opacity="0.25"></circle>
 </svg>
 <div style="position: relative; z-index: 1; max-width: 1240px; margin: 0 auto; padding: 48px 24px 28px; display: flex; flex-direction: column; gap: 32px">
 <div style="display: flex; flex-wrap: wrap; gap: 36px; justify-content: space-between">
@@ -1207,8 +1146,8 @@ class Component extends DCLogic {
     const sectors = en
       ? ['Automotive & motorbikes', 'Precision engineering', 'Electronics & components', 'Plastics & rubber', 'Textiles & footwear', 'Food processing', 'Chemicals & pharmaceuticals', 'Logistics & warehousing', 'Information technology', 'Medical devices', 'Energy & environment', 'Other']
       : ['Ô tô & xe máy', 'Cơ khí chính xác', 'Điện tử & linh kiện', 'Nhựa & cao su', 'Dệt may & da giày', 'Chế biến thực phẩm', 'Hóa chất & dược phẩm', 'Logistics & kho bãi', 'Công nghệ thông tin', 'Thiết bị y tế', 'Năng lượng & môi trường', 'Khác'];
-    const ICONS = ["M5 17h14M6 17l1.5-5h9L18 17M8 12l1-3h6l1 3M7 20a1.5 1.5 0 1 0 0-3M17 20a1.5 1.5 0 1 0 0-3", "M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1", "M7 7h10v10H7zM10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4", "M8 3h8l1 5H7zM7 8h10v4a5 5 0 0 1-10 0zM12 17v4M9 21h6", "M4 7l4-3 4 3 4-3 4 3v13H4zM9 12h6", "M6 3v6a3 3 0 0 0 6 0V3M9 3v18M17 3c-2 2-2 6 0 8v10", "M9 3h6M10 3v6L5 18a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3M8 14h8", "M3 7h11v9H3zM14 10h4l3 3v3h-7M7 19a1.5 1.5 0 1 0 0-3M17 19a1.5 1.5 0 1 0 0-3", "M3 5h18v11H3zM8 20h8M12 16v4", "M12 3v18M3 12h18M7 7h10v10H7z", "M13 2L4 14h7l-1 8 9-12h-7z", "M12 5v14M5 12h14"];
-    const tiles = sectors.map((t0, i) => { const t = i === sectors.length - 1 ? L('Và các lĩnh vực khác', 'And other sectors') : t0; return ({ t, d: ICONS[i], style: 'background: ' + (i === sectors.length - 1 ? '#F7FBFF; border: 1.5px dashed #A9CDEB' : '#FFFFFF; border: 1px solid #DCEBF7') + '; border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 14px; min-height: 118px', iconStyle: 'width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; ' + (i % 2 ? 'background: #FFF1EA; color: #D23A09' : 'background: #EAF4FD; color: #0A2C74') }); });
+    const ICONS = [[{"d": "M3 15.5v-3l2.2-4.6A2 2 0 0 1 7 6.8h10a2 2 0 0 1 1.8 1.1L21 12.5v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z", "c": "#0A2C74"}, {"d": "M3.5 12.5h17M7 9.5h10", "c": "#0A2C74"}, {"d": "M6.5 18.5a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6zM17.5 18.5a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6z", "c": "#E2430C"}], [{"d": "M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z", "c": "#E2430C"}, {"d": "M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M5.6 18.4l1.6-1.6M16.8 7.2l1.6-1.6", "c": "#0A2C74"}, {"d": "M12 6.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11z", "c": "#0A2C74"}], [{"d": "M7 7h10v10H7z", "c": "#0A2C74"}, {"d": "M9 3v4M12 3v4M15 3v4M9 17v4M12 17v4M15 17v4M3 9h4M3 12h4M3 15h4M17 9h4M17 12h4M17 15h4", "c": "#0A2C74"}, {"d": "M10 10h4v4h-4z", "c": "#E2430C"}], [{"d": "M12 3.5s5 5.6 5 9.2a5 5 0 0 1-10 0c0-3.6 5-9.2 5-9.2z", "c": "#0A2C74"}, {"d": "M10 13.5a2 2 0 0 0 2 2", "c": "#E2430C"}, {"d": "M4 19.5h3M17 19.5h3M9.5 19.5h5", "c": "#E2430C"}], [{"d": "M8 4l-4 2.5 1.8 3.5L8 9v11h8V9l2.2 1 1.8-3.5L16 4h-2a2 2 0 0 1-4 0z", "c": "#0A2C74"}, {"d": "M10.5 13h3M10.5 16h3", "c": "#E2430C"}], [{"d": "M6 9h12l-1 11H7z", "c": "#0A2C74"}, {"d": "M8 9V7a4 4 0 0 1 8 0v2", "c": "#0A2C74"}, {"d": "M12 12.5c-1.8 0-3 1.3-3 3 2 0 3-1 3-3zM12 12.5c1.8 0 3 1.3 3 3-2 0-3-1-3-3z", "c": "#E2430C"}], [{"d": "M9.5 3h5M10.5 3v5.5L5.5 17.5A2 2 0 0 0 7.2 20.5h9.6a2 2 0 0 0 1.7-3L13.5 8.5V3", "c": "#0A2C74"}, {"d": "M7.8 14.5h8.4", "c": "#E2430C"}, {"d": "M10 17.5h.01M13.5 16.5h.01", "c": "#E2430C"}], [{"d": "M2.5 6.5h11v9.5h-11z", "c": "#0A2C74"}, {"d": "M13.5 9.5h4l3 3.2v3.3h-7", "c": "#0A2C74"}, {"d": "M6 19a1.8 1.8 0 1 0 0-3.6A1.8 1.8 0 0 0 6 19zM17 19a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6z", "c": "#E2430C"}, {"d": "M5.5 9.5h5", "c": "#E2430C"}], [{"d": "M3 4.5h18v12H3z", "c": "#0A2C74"}, {"d": "M8.5 20.5h7M12 16.5v4", "c": "#0A2C74"}, {"d": "M9.5 8.5l-2 2 2 2M14.5 8.5l2 2-2 2", "c": "#E2430C"}], [{"d": "M12 20s-7.5-4.4-7.5-10A4.2 4.2 0 0 1 12 7.3 4.2 4.2 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z", "c": "#0A2C74"}, {"d": "M5.5 12h3l1.5-2.5 2.5 5 1.5-2.5h4.5", "c": "#E2430C"}], [{"d": "M13 2.5L5.5 13.5H11l-1 8 7.5-11H12z", "c": "#0A2C74"}, {"d": "M17.5 15.5c2.5 0 4-1.6 4-4-2.4 0-4 1.5-4 4zM17.5 15.5v5", "c": "#E2430C"}], [{"d": "M4 4h6.5v6.5H4zM13.5 4H20v6.5h-6.5zM4 13.5h6.5V20H4z", "c": "#0A2C74"}, {"d": "M16.75 13.5v6.5M13.5 16.75H20", "c": "#E2430C"}]];
+    const tiles = sectors.map((t0, i) => { const last = i === sectors.length - 1; const t = last ? L('Và các lĩnh vực khác', 'And other sectors') : t0; return ({ t, n: last ? '+' : String(i + 1).padStart(2, '0'), paths: ICONS[i], style: 'position: relative; background: ' + (last ? '#F7FBFF; border: 1.5px dashed #A9CDEB' : 'linear-gradient(180deg, #FFFFFF 0%, #F5FAFF 100%); border: 1px solid #DCEBF7') + '; border-radius: 20px; padding: 20px 18px 18px; display: flex; flex-direction: column; gap: 14px; min-height: 140px; overflow: hidden', iconStyle: 'width: 58px; height: 58px; border-radius: 16px; display: flex; align-items: center; justify-content: center; background: ' + (i % 2 ? 'linear-gradient(145deg, #FFF4EE 0%, #FFE2D4 100%)' : 'linear-gradient(145deg, #EEF6FF 0%, #D6E9FB 100%)') + '; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.9), 0 8px 18px rgba(10,44,116,0.08)' }); });
     const prefs = en ? ['Vietnamese', 'English', 'Japanese', 'Korean', 'Chinese'] : ['Tiếng Việt', 'Tiếng Anh', 'Tiếng Nhật', 'Tiếng Hàn', 'Tiếng Trung'];
     const GVI = [
       { who: 'Ban Tổ chức', t: 'Khởi tạo tài khoản Buyer', subs: [
