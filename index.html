@@ -84,7 +84,7 @@ details[open] .pm{transform:rotate(45deg)}
 <a href="#chuong-trinh" style="text-decoration: none">Chương trình</a>
 <a href="#dia-diem" style="text-decoration: none">Địa điểm</a>
 <span style="display: inline-flex; border: 1.5px solid #C5D8EC; border-radius: 999px; padding: 3px; gap: 2px" role="group" aria-label="{{ langLabel }}"><button type="button" onClick="{{ toVi }}" aria-pressed="{{ isViStr }}" style="{{ viStyle }}">VI</button><button type="button" onClick="{{ toEn }}" aria-pressed="{{ isEnStr }}" style="{{ enStyle }}">EN</button></span>
-<a class="navcta" href="https://hasi.org.vn/su-kien/hoi-nghi-ket-noi-cung-cau-lien-ket-doanh-nghiep-theo-cum-nganh-chuoi-cung-ung" target="_blank" rel="noopener" style="text-decoration: none; background: #D23A09; color: #FFFFFF; padding: 11px 20px; border-radius: 999px; font-weight: 700">Đăng ký ngay</a>
+<button type="button" class="navcta" onClick="{{ openReg }}" aria-haspopup="dialog" style="font: inherit; cursor: pointer; border: none; background: #D23A09; color: #FFFFFF; padding: 11px 20px; border-radius: 999px; font-weight: 700">Đăng ký ngay</button>
 </nav>
 </div>
 </header>
@@ -516,6 +516,23 @@ details[open] .pm{transform:rotate(45deg)}
 </div>
 </section>
 
+<sc-if value="{{ regOpen }}">
+<div role="dialog" aria-modal="true" aria-label="Đăng ký tham dự" style="position: fixed; inset: 0; z-index: 300; display: flex; align-items: center; justify-content: center; padding: 20px">
+<div onClick="{{ closeReg }}" style="position: absolute; inset: 0; background: rgba(6,24,66,0.55); backdrop-filter: blur(3px)"></div>
+<div style="position: relative; width: 100%; max-width: 440px; background: linear-gradient(180deg, #F3F9FF 0%, #FFFFFF 60%); border-radius: 28px; padding: 28px; box-shadow: 0 30px 80px rgba(6,24,66,0.35); display: flex; flex-direction: column; gap: 18px">
+<button type="button" onClick="{{ closeReg }}" aria-label="Đóng" style="position: absolute; top: 16px; right: 16px; width: 40px; height: 40px; border-radius: 999px; border: 1px solid #DCEBF7; background: #FFFFFF; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0A2C74" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+<div style="display: flex; flex-direction: column; gap: 8px; padding-right: 40px">
+<span class="h" style="font-size: 12px; font-weight: 800; letter-spacing: 1.6px; color: #D23A09">ĐĂNG KÝ THAM DỰ</span>
+<strong class="h" style="font-size: 23px; line-height: 1.3; color: #0A2C74">Liên hệ Ban Tổ chức để đăng ký Buyer</strong>
+<span style="font-size: 14.5px; line-height: 1.6; color: #4A5B80">Chọn cách liên hệ thuận tiện. Ban Tổ chức sẽ xác nhận và khởi tạo tài khoản Buyer cho Quý doanh nghiệp.</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<a href="tel:+84919801313" class="lift" style="display: flex; align-items: center; gap: 16px; text-decoration: none; background: #FFFFFF; border: 1.5px solid #DCEBF7; border-radius: 18px; padding: 16px 18px"><span style="flex: none; width: 52px; height: 52px; border-radius: 16px; background: linear-gradient(145deg, #E2430C 0%, #D23A09 100%); display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg></span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px"><strong class="h" style="font-size: 17px; color: #0A2C74">Gọi điện</strong><span style="font-size: 14px; color: #4A5B80">0919 801 313</span></span><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8DA2C4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="M9 6l6 6-6 6"></path></svg></a>
+<a href="https://zalo.me/0919801313" target="_blank" rel="noopener" class="lift" style="display: flex; align-items: center; gap: 16px; text-decoration: none; background: #FFFFFF; border: 1.5px solid #DCEBF7; border-radius: 18px; padding: 16px 18px"><span style="flex: none; width: 52px; height: 52px; border-radius: 16px; background: linear-gradient(145deg, #0A7CFF 0%, #0068FF 100%); display: flex; align-items: center; justify-content: center"><span class="h" aria-hidden="true" style="font-size: 13px; font-weight: 900; color: #FFFFFF; letter-spacing: 0.2px">Zalo</span></span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px"><strong class="h" style="font-size: 17px; color: #0A2C74">Nhắn tin qua Zalo</strong><span style="font-size: 14px; color: #4A5B80">Zalo · 0919 801 313</span></span><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8DA2C4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="M9 6l6 6-6 6"></path></svg></a>
+</div>
+</div>
+</div>
+</sc-if>
 <!-- FOOTER -->
 <footer style="position: relative; overflow: hidden; background: #071F55; color: #BBD0F2">
 <img src="skyline.png" alt="" aria-hidden="true" style="display: block; width: 100%; height: 110px; object-fit: cover; object-position: center bottom; background: #FFFFFF">
@@ -565,7 +582,7 @@ details[open] .pm{transform:rotate(45deg)}
 </footer>
 
 <div class="mcta" style="position: sticky; bottom: 0; z-index: 60; padding: 12px 16px; background: rgba(255,255,255,0.95); border-top: 1px solid #DCEBF7">
-<a href="https://hasi.org.vn/su-kien/hoi-nghi-ket-noi-cung-cau-lien-ket-doanh-nghiep-theo-cum-nganh-chuoi-cung-ung" target="_blank" rel="noopener" class="h" style="flex: 1; text-align: center; text-decoration: none; background: #D23A09; color: #FFFFFF; font-weight: 800; font-size: 16px; padding: 15px; border-radius: 999px">Đăng ký ngay</a>
+<button type="button" onClick="{{ openReg }}" aria-haspopup="dialog" class="h" style="flex: 1; cursor: pointer; border: none; font-family: inherit; text-align: center; background: #D23A09; color: #FFFFFF; font-weight: 800; font-size: 16px; padding: 15px; border-radius: 999px">Đăng ký ngay</button>
 </div>
 
 </div>
@@ -590,7 +607,7 @@ details[open] .pm{transform:rotate(45deg)}
 <a href="#chuong-trinh" style="text-decoration: none">Programme</a>
 <a href="#dia-diem" style="text-decoration: none">Venue</a>
 <span style="display: inline-flex; border: 1.5px solid #C5D8EC; border-radius: 999px; padding: 3px; gap: 2px" role="group" aria-label="{{ langLabel }}"><button type="button" onClick="{{ toVi }}" aria-pressed="{{ isViStr }}" style="{{ viStyle }}">VI</button><button type="button" onClick="{{ toEn }}" aria-pressed="{{ isEnStr }}" style="{{ enStyle }}">EN</button></span>
-<a class="navcta" href="https://hasi.org.vn/su-kien/hoi-nghi-ket-noi-cung-cau-lien-ket-doanh-nghiep-theo-cum-nganh-chuoi-cung-ung" target="_blank" rel="noopener" style="text-decoration: none; background: #D23A09; color: #FFFFFF; padding: 11px 20px; border-radius: 999px; font-weight: 700">Register now</a>
+<button type="button" class="navcta" onClick="{{ openReg }}" aria-haspopup="dialog" style="font: inherit; cursor: pointer; border: none; background: #D23A09; color: #FFFFFF; padding: 11px 20px; border-radius: 999px; font-weight: 700">Register now</button>
 </nav>
 </div>
 </header>
@@ -1022,6 +1039,23 @@ details[open] .pm{transform:rotate(45deg)}
 </div>
 </section>
 
+<sc-if value="{{ regOpen }}">
+<div role="dialog" aria-modal="true" aria-label="Register to attend" style="position: fixed; inset: 0; z-index: 300; display: flex; align-items: center; justify-content: center; padding: 20px">
+<div onClick="{{ closeReg }}" style="position: absolute; inset: 0; background: rgba(6,24,66,0.55); backdrop-filter: blur(3px)"></div>
+<div style="position: relative; width: 100%; max-width: 440px; background: linear-gradient(180deg, #F3F9FF 0%, #FFFFFF 60%); border-radius: 28px; padding: 28px; box-shadow: 0 30px 80px rgba(6,24,66,0.35); display: flex; flex-direction: column; gap: 18px">
+<button type="button" onClick="{{ closeReg }}" aria-label="Close" style="position: absolute; top: 16px; right: 16px; width: 40px; height: 40px; border-radius: 999px; border: 1px solid #DCEBF7; background: #FFFFFF; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0A2C74" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+<div style="display: flex; flex-direction: column; gap: 8px; padding-right: 40px">
+<span class="h" style="font-size: 12px; font-weight: 800; letter-spacing: 1.6px; color: #D23A09">REGISTER TO ATTEND</span>
+<strong class="h" style="font-size: 23px; line-height: 1.3; color: #0A2C74">Contact the Organising Committee to register as a Buyer</strong>
+<span style="font-size: 14.5px; line-height: 1.6; color: #4A5B80">Choose how to reach us. The Organising Committee will confirm and set up your Buyer account.</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<a href="tel:+84919801313" class="lift" style="display: flex; align-items: center; gap: 16px; text-decoration: none; background: #FFFFFF; border: 1.5px solid #DCEBF7; border-radius: 18px; padding: 16px 18px"><span style="flex: none; width: 52px; height: 52px; border-radius: 16px; background: linear-gradient(145deg, #E2430C 0%, #D23A09 100%); display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"></path></svg></span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px"><strong class="h" style="font-size: 17px; color: #0A2C74">Call</strong><span style="font-size: 14px; color: #4A5B80">0919 801 313</span></span><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8DA2C4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="M9 6l6 6-6 6"></path></svg></a>
+<a href="https://zalo.me/0919801313" target="_blank" rel="noopener" class="lift" style="display: flex; align-items: center; gap: 16px; text-decoration: none; background: #FFFFFF; border: 1.5px solid #DCEBF7; border-radius: 18px; padding: 16px 18px"><span style="flex: none; width: 52px; height: 52px; border-radius: 16px; background: linear-gradient(145deg, #0A7CFF 0%, #0068FF 100%); display: flex; align-items: center; justify-content: center"><span class="h" aria-hidden="true" style="font-size: 13px; font-weight: 900; color: #FFFFFF; letter-spacing: 0.2px">Zalo</span></span><span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px"><strong class="h" style="font-size: 17px; color: #0A2C74">Message on Zalo</strong><span style="font-size: 14px; color: #4A5B80">Zalo · 0919 801 313</span></span><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8DA2C4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex: none"><path d="M9 6l6 6-6 6"></path></svg></a>
+</div>
+</div>
+</div>
+</sc-if>
 <!-- FOOTER -->
 <footer style="position: relative; overflow: hidden; background: #071F55; color: #BBD0F2">
 <img src="skyline.png" alt="" aria-hidden="true" style="display: block; width: 100%; height: 110px; object-fit: cover; object-position: center bottom; background: #FFFFFF">
@@ -1071,7 +1105,7 @@ details[open] .pm{transform:rotate(45deg)}
 </footer>
 
 <div class="mcta" style="position: sticky; bottom: 0; z-index: 60; padding: 12px 16px; background: rgba(255,255,255,0.95); border-top: 1px solid #DCEBF7">
-<a href="https://hasi.org.vn/su-kien/hoi-nghi-ket-noi-cung-cau-lien-ket-doanh-nghiep-theo-cum-nganh-chuoi-cung-ung" target="_blank" rel="noopener" class="h" style="flex: 1; text-align: center; text-decoration: none; background: #D23A09; color: #FFFFFF; font-weight: 800; font-size: 16px; padding: 15px; border-radius: 999px">Register now</a>
+<button type="button" onClick="{{ openReg }}" aria-haspopup="dialog" class="h" style="flex: 1; cursor: pointer; border: none; font-family: inherit; text-align: center; background: #D23A09; color: #FFFFFF; font-weight: 800; font-size: 16px; padding: 15px; border-radius: 999px">Register now</button>
 </div>
 
 </div>
@@ -1126,7 +1160,7 @@ window.__mount=function(C){comp=new C({});render();if(comp.componentDidMount)com
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { lang: 'vi', now: Date.now(), k: 0, g: 0, guide: false, role: 'buyer', f: { name: '', company: '', title: '', email: '', phone: '', country: '', website: '' }, sector: 0, kb: 0, kg: 0, pref: 0, agree: false, tried: false, sent: false };
+    this.state = { lang: 'vi', now: Date.now(), k: 0, g: 0, guide: false, reg: false, role: 'buyer', f: { name: '', company: '', title: '', email: '', phone: '', country: '', website: '' }, sector: 0, kb: 0, kg: 0, pref: 0, agree: false, tried: false, sent: false };
   }
   componentDidMount() {
     this.t = setInterval(() => this.setState({ now: Date.now() }), 1000);
@@ -1314,6 +1348,7 @@ class Component extends DCLogic {
       isVi: !en, isEn: en, isViStr: en ? 'false' : 'true', isEnStr: en ? 'true' : 'false',
       langLabel: L('Ngôn ngữ', 'Language'), viStyle: pill(!en), enStyle: pill(en),
       toVi: () => this.setState({ lang: 'vi', sector: 0, pref: 0 }), toEn: () => this.setState({ lang: 'en', sector: 0, pref: 0 }),
+      regOpen: !!st.reg, openReg: () => this.setState({ reg: true }), closeReg: () => this.setState({ reg: false }),
       cd, stats, sectors, kTabs, kGroups, kSel, kListHead, kHint, prefs, timeline, chips, scr, day2, roles, fields, faq,
       kImg: su.kind === 'img', kMail1: su.kind === 'mail1', kTeam: su.kind === 'team', kMail4: su.kind === 'mail4', kApp: su.kind === 'app',
       isFirst: pos === 0, isLast: pos === flat.length - 1,
